@@ -49,6 +49,8 @@ namespace CLIPSForms
         {
             InputField.Items.Clear();
             InputField.Items.AddRange(GetPossibleAnswer());
+            if (InputField.Items.Count!=0)
+                InputField.SelectedIndex = 0;
         }
 
         private void NextBtn_Click(object sender, EventArgs e)
