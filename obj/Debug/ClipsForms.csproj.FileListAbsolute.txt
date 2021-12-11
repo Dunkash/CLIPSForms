@@ -1,0 +1,15 @@
+C:\Users\Dunkash\source\repos\CLIPSForms\bin\Debug\AutoFormsExample.exe.config
+C:\Users\Dunkash\source\repos\CLIPSForms\bin\Debug\AutoFormsExample.exe
+C:\Users\Dunkash\source\repos\CLIPSForms\bin\Debug\AutoFormsExample.pdb
+C:\Users\Dunkash\source\repos\CLIPSForms\bin\Debug\CLIPSCLRWrapper.dll
+C:\Users\Dunkash\source\repos\CLIPSForms\bin\Debug\Microsoft.Speech.dll
+C:\Users\Dunkash\source\repos\CLIPSForms\obj\Debug\ClipsForms.csproj.AssemblyReference.cache
+C:\Users\Dunkash\source\repos\CLIPSForms\obj\Debug\ClipsForms.ClipsForms.resources
+C:\Users\Dunkash\source\repos\CLIPSForms\obj\Debug\AutoFormsExample.Properties.Resources.resources
+C:\Users\Dunkash\source\repos\CLIPSForms\obj\Debug\ClipsForms.csproj.GenerateResource.cache
+C:\Users\Dunkash\source\repos\CLIPSForms\obj\Debug\ClipsForms.csproj.CoreCompileInputs.cache
+C:\Users\Dunkash\source\repos\CLIPSForms\obj\Debug\ClipsForms.csproj.CopyComplete
+C:\Users\Dunkash\source\repos\CLIPSForms\obj\Debug\AutoFormsExample.exe
+C:\Users\Dunkash\source\repos\CLIPSForms\obj\Debug\AutoFormsExample.pdb
+C:\Users\Dunkash\source\repos\CLIPSForms\bin\Debug\auto.clp
+C:\Users\Dunkash\source\repos\CLIPSForms\bin\Debug\auto_en.clp
