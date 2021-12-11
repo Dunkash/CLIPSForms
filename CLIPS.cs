@@ -32,16 +32,27 @@ namespace CLIPSForms
         /// </summary>
         private enum InterviewState { GREETING, INTERVIEW, CONCLUSION };
 
-        private CLIPSNET.Environment clips = new CLIPSNET.Environment();
-        private String lastAnswer = null;
-        private String relationAsserted = null;
-        private List<string> variableAsserts = new List<string>();
-        private List<string> priorAnswers = new List<string>();
-
         /// <summary>
         /// Current state of the envinronment.
         /// </summary>
         private InterviewState currentState;
+
+        /// <summary>
+        /// Current clips envinronment
+        /// </summary>
+        private readonly CLIPSNET.Environment clips = new CLIPSNET.Environment();
+
+        //private String lastAnswer = null;
+        private String relationAsserted = null;
+        private readonly List<string> variableAsserts = new List<string>();
+        private readonly List<string> priorAnswers = new List<string>();
+
+        /// <summary>
+        /// List of currently possible answers, as well as CLIPS commands, connected to them
+        /// </summary>
+        private Dictionary<string, string> answers = null;
+
+        private string currentMessage = "";
 
 
         ///<summary> 
@@ -52,6 +63,15 @@ namespace CLIPSForms
             clips.Load(@"auto.clp");
             clips.Load(@"auto_en.clp");
             clips.Reset();
+        }
+
+        /// <summary>
+        /// Generates array of possible answers for current state
+        /// </summary>
+        /// <returns>Array of string answer possibilities</returns>
+        private string[] GetPossibleAnswer()
+        {
+            return answers.Keys.ToArray();
         }
 
         /// <summary>
@@ -69,6 +89,10 @@ namespace CLIPSForms
             HandleResponse();
         }
 
+        /// <summary>
+        /// Handles the CLIPS response from CLIPS to NET proxy channel.
+        /// Sets response message from CLIPS to UI, sets list of possible answers and connections between answers and facts.
+        /// </summary>
         private void HandleResponse()
         {
             /*===========================*/
@@ -82,18 +106,7 @@ namespace CLIPSForms
             /* Determine the Next/Prev button states. */
             /*========================================*/
 
-            if (fv["state"].ToString().Equals("conclusion"))
-            {
-
-            }
-            else if (fv["state"].ToString().Equals("greeting"))
-            {
-
-            }
-            else
-            {
-
-            }
+            SetCurrentState(fv);
 
             /*=====================*/
             /* Set up the choices. */
@@ -102,24 +115,82 @@ namespace CLIPSForms
             MultifieldValue damf = (MultifieldValue)fv["display-answers"];
             MultifieldValue vamf = (MultifieldValue)fv["valid-answers"];
 
-            String selected = fv["response"].ToString();
+            //String selected = fv["response"].ToString();
+
+            answers = new Dictionary<string, string>();
 
             for (int i = 0; i < damf.Count; i++)
             {
                 LexemeValue da = (LexemeValue)damf[i];
                 LexemeValue va = (LexemeValue)vamf[i];
+
+                answers.Add(da.Value, va.Value);
             }
 
+            relationAsserted = ((LexemeValue)fv["relation-asserted"]).Value;
 
-            /*====================================*/
-            /* Set the label to the display text. */
-            /*====================================*/
+            currentMessage = ((StringValue)fv["display"]).Value;
+        }
 
 
-            /*====================================*/
-            /* Set the label to the display text. */
-            /*====================================*/
+        /// <summary>
+        /// Gets UI response for current situation
+        /// </summary>
+        /// <returns>Message for message box</returns>
+        private string GetMessage()
+        {
+            return currentMessage;
+        }
 
+        /// <summary>
+        /// Sets current system state based.
+        /// </summary>
+        /// <param name="fv">CLIPS to NET proxy adress</param>
+        private void SetCurrentState(FactAddressValue fv)
+        {
+            if (fv["state"].ToString().Equals("conclusion"))
+            {
+                currentState = InterviewState.CONCLUSION;
+            }
+            else if (fv["state"].ToString().Equals("greeting"))
+            {
+                currentState = InterviewState.GREETING;
+            }
+            else
+            {
+                currentState = InterviewState.INTERVIEW;
+            }
+        }
+
+        /// <summary>
+        /// Handles inputs from "console".
+        /// </summary>
+        /// <param name="response">User input for current state</param>
+        private bool InputHandler(string response)
+        {
+            string theString;
+
+            switch (currentState)
+            {
+                case InterviewState.GREETING:
+                case InterviewState.INTERVIEW:
+                    if (answers.TryGetValue(response, out string theAnswer))
+                    {
+                        theString = "(" + relationAsserted + " " + theAnswer + ")";
+                        variableAsserts.Add(theString);
+                        priorAnswers.Add(theAnswer);
+                        break;
+                    }
+                    else
+                        return false;
+                case InterviewState.CONCLUSION:
+                    variableAsserts.Clear();
+                    priorAnswers.Clear();
+                    break;
+            }
+
+            ProcessRules();
+            return true;
         }
 
     }
