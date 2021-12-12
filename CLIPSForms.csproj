@@ -122,6 +122,12 @@
     <None Include="auto_en.clp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="crafting.clp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="crafting_en.clp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

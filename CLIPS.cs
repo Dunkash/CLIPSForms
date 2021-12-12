@@ -60,8 +60,8 @@ namespace CLIPSForms
         ///</summary>
         void LoadInitial()
         {
-            clips.Load(@"auto.clp");
-            clips.Load(@"auto_en.clp");
+            clips.Load(@"crafting.clp");
+            clips.Load(@"crafting_en.clp");
             clips.Reset();
         }
 

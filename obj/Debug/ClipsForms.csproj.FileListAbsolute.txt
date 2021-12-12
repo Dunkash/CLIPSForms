@@ -13,3 +13,5 @@ C:\Users\Dunkash\source\repos\CLIPSForms\obj\Debug\AutoFormsExample.exe
 C:\Users\Dunkash\source\repos\CLIPSForms\obj\Debug\AutoFormsExample.pdb
 C:\Users\Dunkash\source\repos\CLIPSForms\bin\Debug\auto.clp
 C:\Users\Dunkash\source\repos\CLIPSForms\bin\Debug\auto_en.clp
+C:\Users\Dunkash\source\repos\CLIPSForms\bin\Debug\crafting.clp
+C:\Users\Dunkash\source\repos\CLIPSForms\bin\Debug\crafting_en.clp
