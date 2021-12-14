@@ -89,6 +89,10 @@ namespace CLIPSForms
             HandleResponse();
         }
 
+        /// <summary>
+        /// Pushes the asserts, located in the "Additional asserts" multislot of UI class of CLIPS file, into the application.
+        /// </summary>
+        /// <param name="fv">UI class adress</param>
         private void AdditionalAsserts(FactAddressValue fv)
         {
             MultifieldValue damf = (MultifieldValue)fv["additional-asserts"];
