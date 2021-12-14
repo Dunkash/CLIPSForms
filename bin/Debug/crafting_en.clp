@@ -1,27 +1,53 @@
 ;# Properties File for English
+
+
 (deffacts text-for-id
 (text-for-id 
-   (id no)
-   (text "no"))
+	(id no)
+	(text "no"))
 (text-for-id 
-   (id yes)
-   (text "yes"))
+	(id yes)
+	(text "yes"))
+(text-for-id
+	(id proceed)
+	(text "proceed"))
+
+
 (text-for-id 
-   (id WelcomeMessage)
-   (text "Welcome to basic crafting-based CLIPS system"))
+   (id dog)
+   (text "dog"))
 (text-for-id 
-   (id HasT1Question)
-   (text "Do you have all tier 1 (torch,workbench) items ?"))
+   (id cat)
+   (text "cat"))
+(text-for-id
+   (id car)
+   (text "car"))
+(text-for-id
+   (id board)
+   (text "board"))
+(text-for-id
+   (id wood)
+   (text "wood"))
+
 (text-for-id 
-   (id HasT2Question)
-   (text "Do you have all tier 2 (torch,workbench) items ?"))
+	(id WelcomeMessage)
+	(text "Welcome to basic crafting-based CLIPS system."))
 (text-for-id 
-   (id HasT3Question)
-   (text "Do you have all tier 3 (torch,workbench) items ?"))
+	(id InitialQuestion)
+	(text "What do you want to craft?"))
 (text-for-id 
-   (id NothingToCraft)
-   (text "You have everything you need. Dig deep and find some diamonds!"))
+	(id CraftingBoard)
+	(text "To craft boards, you need to put wood in your crafting window"))
+(text-for-id
+	(id HaveWood)
+	(text "Do you have wood?"))
 (text-for-id 
-   (id FuckYou)
-   (text "Well, fuck you!"))
+	(id CraftWood)
+	(text "To gather wood, you need to chop some trees"))
+(text-for-id 
+	(id End)
+	(text "Tutorial completed"))
+(text-for-id 
+	(id ExplainWorkbench)
+	(text "Use whatever"))
 )

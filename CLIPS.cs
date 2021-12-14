@@ -89,6 +89,15 @@ namespace CLIPSForms
             HandleResponse();
         }
 
+        private void AdditionalAsserts(FactAddressValue fv)
+        {
+            MultifieldValue damf = (MultifieldValue)fv["additional-asserts"];
+            foreach (var assertion in damf)
+            {
+                variableAsserts.Add(assertion.ToString().Trim(new char[] {'\\','"' }));
+            }
+        }
+
         /// <summary>
         /// Handles the CLIPS response from CLIPS to NET proxy channel.
         /// Sets response message from CLIPS to UI, sets list of possible answers and connections between answers and facts.
@@ -126,7 +135,7 @@ namespace CLIPSForms
 
                 answers.Add(da.Value, va.Value);
             }
-
+            AdditionalAsserts(fv);
             relationAsserted = ((LexemeValue)fv["relation-asserted"]).Value;
 
             currentMessage = ((StringValue)fv["display"]).Value;

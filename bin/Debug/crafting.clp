@@ -19,7 +19,8 @@
    (slot response (default none))
    (multislot valid-answers)
    (multislot display-answers)
-   (slot state (default middle)))
+   (slot state (default middle))
+   (multislot additional-asserts))
    
 ;;;***************************
 ;;;* DEFFUNCTION DEFINITIONS *
@@ -178,11 +179,29 @@
    (assert (UI-state (display ?message)
                      (relation-asserted greeting)
                      (state ?state)
-                     (valid-answers yes)
-                     (display-answers yes)))
+                     (valid-answers proceed)
+                     (display-answers proceed)
+                     ))
    (halt))
 
 (defmethod handle-state ((?state SYMBOL (eq ?state interview))
+                         (?target SYMBOL (eq ?target gui))
+                         (?message LEXEME)
+                         (?relation-asserted SYMBOL)
+                         (?response PRIMITIVE)
+                         (?valid-answers MULTIFIELD)
+                         (?display-answers MULTIFIELD)
+                         (?additional-asserts MULTIFIELD))
+   (assert (UI-state (display ?message)
+                     (relation-asserted ?relation-asserted)
+                     (state ?state)
+                     (response ?response)
+                     (valid-answers ?valid-answers)
+                     (display-answers ?display-answers)
+                     (additional-asserts ?additional-asserts)))
+   (halt))
+
+   (defmethod handle-state ((?state SYMBOL (eq ?state interview))
                          (?target SYMBOL (eq ?target gui))
                          (?message LEXEME)
                          (?relation-asserted SYMBOL)
@@ -212,7 +231,7 @@
 ;;;****************
 
 (defrule system-banner ""
-  (not (greeting yes))
+  (not (greeting proceed))
   =>
   (handle-state greeting
                 ?*target*
@@ -224,83 +243,75 @@
 ;;;* QUERY RULES *
 ;;;***************
 
-(defrule determine-has-T1 ""
+(defrule initial-question ""
 
-   (greeting yes)
-   (not (has-T1 ?))
+   (greeting proceed)
+   (not (crafting ?))
    
    =>
 
-   (bind ?answers (create$ no yes))
+   (bind ?answers (create$ board))
    (handle-state interview
                  ?*target*
-                 (find-text-for-id HasT1Question)
-                 has-T1
+                 (find-text-for-id InitialQuestion)
+                 crafting
                  (nth$ 1 ?answers)
                  ?answers
                  (translate-av ?answers)))
 
-(defrule determine-has-T2 ""
+(defrule craft-board ""
 
-   (has-T1 yes)
-   (not (conclusion))
-   (not (has-T2 ?))
-   
+   (crafting board)
+   (not (board proceed))
    =>
 
-   (bind ?answers (create$ no yes))
+   (bind ?answers (create$ proceed))
    (handle-state interview
                  ?*target*
-                 (find-text-for-id HasT2Question)
-                 has-T2
+                 (find-text-for-id CraftingBoard)
+                 board
+                 (nth$ 1 ?answers)
+                 ?answers
+                 (translate-av ?answers)
+                 (create$ "(crafting wood)"))
+ )
+
+(defrule has-wood ""
+
+   (crafting wood)
+   (not (wood ?))
+   =>
+
+   (bind ?answers (create$ yes no))
+   (handle-state interview
+                 ?*target*
+                 (find-text-for-id HaveWood)
+                 wood
                  (nth$ 1 ?answers)
                  ?answers
                  (translate-av ?answers)))
 
-(defrule determine-has-T3 ""
+(defrule craft-wood ""
 
-
-   (not (has-T3 ?))
-   (not (conclusion))
-   (has-T2 yes)
-   
+   (wood no)
+   (not (wood proceed))
    =>
 
-   (bind ?answers (create$ no yes))
+   (bind ?answers (create$ proceed))
    (handle-state interview
                  ?*target*
-                 (find-text-for-id HasT3Question)
-                 has-T3
+                 (find-text-for-id CraftWood)
+                 wood
                  (nth$ 1 ?answers)
                  ?answers
                  (translate-av ?answers)))
-				 
 
 
 ;;;******************
 ;;;* CRAFTING RULES *
 ;;;******************
 
-(defrule nothing-to-craft ""
-   (declare (salience 10))
-   (has-T3 yes)
+(defrule craft-dog ""
+   (declare (salience -1))
    =>
-   (handle-state conclusion ?*target* (find-text-for-id NothingToCraft)))
-
-   (defrule something-to-craft1 ""
-   (declare (salience 10))
-   (has-T3 no)
-   =>
-   (handle-state conclusion ?*target* (find-text-for-id FuckYou)))
-
-      (defrule something-to-craft2 ""
-   (declare (salience 10))
-   (has-T1 no)
-   =>
-   (handle-state conclusion ?*target* (find-text-for-id FuckYou)))
-
-      (defrule something-to-craft3 ""
-   (declare (salience 10))
-   (has-T2 no)
-   =>
-   (handle-state conclusion ?*target* (find-text-for-id FuckYou)))
+   (handle-state conclusion ?*target* (find-text-for-id End)))
