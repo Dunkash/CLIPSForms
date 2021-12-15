@@ -180,8 +180,7 @@
                      (relation-asserted greeting)
                      (state ?state)
                      (valid-answers proceed)
-                     (display-answers proceed)
-                     ))
+                     (display-answers proceed)))
    (halt))
 
 (defmethod handle-state ((?state SYMBOL (eq ?state interview))
@@ -250,46 +249,33 @@
    
    =>
 
-   (bind ?answers (create$ board))
+   (bind ?answers (create$ board wood workbench stick woodpick stonepick ironpick forge diamond))
    (handle-state interview
                  ?*target*
                  (find-text-for-id InitialQuestion)
-                 crafting
+                 no
                  (nth$ 1 ?answers)
                  ?answers
-                 (translate-av ?answers)))
+                 (translate-av ?answers)
+                 (create$ "(crafting shit)" )
+                 ))
 
 (defrule craft-board ""
 
-   (crafting board)
+   (board no)
    (not (board proceed))
    =>
 
    (bind ?answers (create$ proceed))
    (handle-state interview
                  ?*target*
-                 (find-text-for-id CraftingBoard)
+                 (find-text-for-id CraftBoard)
                  board
                  (nth$ 1 ?answers)
                  ?answers
                  (translate-av ?answers)
-                 (create$ "(crafting wood)"))
+                 (create$ "(wood ?)" ))
  )
-
-(defrule has-wood ""
-
-   (crafting wood)
-   (not (wood ?))
-   =>
-
-   (bind ?answers (create$ yes no))
-   (handle-state interview
-                 ?*target*
-                 (find-text-for-id HaveWood)
-                 wood
-                 (nth$ 1 ?answers)
-                 ?answers
-                 (translate-av ?answers)))
 
 (defrule craft-wood ""
 
@@ -306,12 +292,172 @@
                  ?answers
                  (translate-av ?answers)))
 
+(defrule craft-stone ""
+
+   (stone no)
+   (not (stone proceed))
+   =>
+
+   (bind ?answers (create$ proceed))
+   (handle-state interview
+                 ?*target*
+                 (find-text-for-id CraftStone)
+                 stone
+                 (nth$ 1 ?answers)
+                 ?answers
+                 (translate-av ?answers)
+                 (create$ "(woodpick ?)")))
+
+
+(defrule craft-workbench ""
+
+   (workbench no)
+   (not (workbench proceed))
+   =>
+
+   (bind ?answers (create$ proceed))
+   (handle-state interview
+                 ?*target*
+                 (find-text-for-id CraftWorkbench)
+                 workbench
+                 (nth$ 1 ?answers)
+                 ?answers
+                 (translate-av ?answers)
+                 (create$ "(board ?)")))
+
+(defrule craft-stick ""
+
+   (stick no)
+   (not (stick proceed))
+   =>
+
+   (bind ?answers (create$ proceed))
+   (handle-state interview
+                 ?*target*
+                 (find-text-for-id CraftStick)
+                 stick
+                 (nth$ 1 ?answers)
+                 ?answers
+                 (translate-av ?answers)
+                 (create$ "(board ?)")))
+
+(defrule craft-wood-pick ""
+
+   (woodpick no)
+   (not (woodpick proceed))
+   =>
+
+   (bind ?answers (create$ proceed))
+   (handle-state interview
+                 ?*target*
+                 (find-text-for-id CraftWoodPick)
+                 woodpick
+                 (nth$ 1 ?answers)
+                 ?answers
+                 (translate-av ?answers)
+                 (create$ "(board ?)" "(stick ?)" "(workbench ?)")))
+
+(defrule craft-stone-pick ""
+
+   (stonepick no)
+   (not (stonepick proceed))
+   =>
+
+   (bind ?answers (create$ proceed))
+   (handle-state interview
+                 ?*target*
+                 (find-text-for-id CraftStonePick)
+                 stonepick
+                 (nth$ 1 ?answers)
+                 ?answers
+                 (translate-av ?answers)
+                 (create$ "(stone ?)" "(stick ?)" "(workbench ?)")))
+
+(defrule craft-iron-pick ""
+
+   (ironpick no)
+   (not (ironpick proceed))
+   =>
+
+   (bind ?answers (create$ proceed))
+   (handle-state interview
+                 ?*target*
+                 (find-text-for-id CraftIronPick)
+                 ironpick
+                 (nth$ 1 ?answers)
+                 ?answers
+                 (translate-av ?answers)
+                 (create$ "(iron ?)" "(stick ?)" "(workbench ?)")))
+
+(defrule craft-iron ""
+
+   (iron no)
+   (not (iron proceed))
+   =>
+
+   (bind ?answers (create$ proceed))
+   (handle-state interview
+                 ?*target*
+                 (find-text-for-id CraftIron)
+                 iron
+                 (nth$ 1 ?answers)
+                 ?answers
+                 (translate-av ?answers)
+                 (create$ "(forge ?)" "(ironore ?)" "(board ?)")))
+
+(defrule craft-iron-ore ""
+
+   (ironore no)
+   (not (ironore proceed))
+   =>
+
+   (bind ?answers (create$ proceed))
+   (handle-state interview
+                 ?*target*
+                 (find-text-for-id CraftIronOre)
+                 ironore
+                 (nth$ 1 ?answers)
+                 ?answers
+                 (translate-av ?answers)
+                 (create$ "(stonepick ?)")))
+
+(defrule craft-forge ""
+
+   (forge no)
+   (not (forge proceed))
+   =>
+
+   (bind ?answers (create$ proceed))
+   (handle-state interview
+                 ?*target*
+                 (find-text-for-id CraftForge)
+                 forge
+                 (nth$ 1 ?answers)
+                 ?answers
+                 (translate-av ?answers)
+                 (create$ "(stone ?)")))
+
+(defrule craft-diamond ""
+
+   (diamond no)
+   (not (diamond proceed))
+   =>
+
+   (bind ?answers (create$ proceed))
+   (handle-state interview
+                 ?*target*
+                 (find-text-for-id CraftDiamond)
+                 diamond
+                 (nth$ 1 ?answers)
+                 ?answers
+                 (translate-av ?answers)
+                 (create$ "(ironpick ?)")))
 
 ;;;******************
 ;;;* CRAFTING RULES *
 ;;;******************
 
-(defrule craft-dog ""
+(defrule end ""
    (declare (salience -1))
    =>
    (handle-state conclusion ?*target* (find-text-for-id End)))

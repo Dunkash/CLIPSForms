@@ -53,45 +53,23 @@ namespace CLIPSForms
                 InputField.SelectedIndex = 0;
         }
 
-        private void NextBtn_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void ResetBtn_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void OpenFile_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void FontSelect_Click(object sender, EventArgs e)
-        {
-            /*
-            if (fontDialog1.ShowDialog() == DialogResult.OK)
-            {
-                codeBox.Font = fontDialog1.Font;
-                outputBox.Font = fontDialog1.Font;
-            }*/
-        }
-
-        private void SaveAsButton_Click(object sender, EventArgs e)
-        {
-            /*
-            clipsSaveFileDialog.FileName = clipsOpenFileDialog.FileName;
-            if (clipsSaveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                System.IO.File.WriteAllText(clipsSaveFileDialog.FileName, codeBox.Text);
-            }
-            */
-        }
-
+        /// <summary>
+        /// Processes console input
+        /// </summary>
         private void InputField_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 SendMessage(InputField.Text);
-
+                if (NeedCheck())
+                {
+                    using (var selectionBox = new SelectionBox(checkOwns))
+                    {
+                        selectionBox.ShowDialog();
+                        AddAssertions(selectionBox.Result);
+                        RefreshChecks();
+                    }
+                }
                 if (InputHandler(InputField.Text))
                 {
                     SetInputOptions();

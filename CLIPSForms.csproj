@@ -103,6 +103,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SelectionBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectionBox.Designer.cs">
+      <DependentUpon>SelectionBox.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -116,6 +122,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SelectionBox.resx">
+      <DependentUpon>SelectionBox.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="auto.clp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

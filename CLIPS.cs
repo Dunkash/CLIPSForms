@@ -47,6 +47,11 @@ namespace CLIPSForms
         private readonly List<string> variableAsserts = new List<string>();
         private readonly List<string> priorAnswers = new List<string>();
 
+        private readonly List<string> checkOwns = new List<string>();
+
+        private readonly HashSet<string> pastChecks = new HashSet<string>();
+
+
         /// <summary>
         /// List of currently possible answers, as well as CLIPS commands, connected to them
         /// </summary>
@@ -54,6 +59,10 @@ namespace CLIPSForms
 
         private string currentMessage = "";
 
+        public List<string> CheckOwns
+        {
+            get => checkOwns;
+        }
 
         ///<summary> 
         ///Loads initial CLIPS files, required for basic functions, then resets envinronment to insert files into CLIPS envinronment. 
@@ -72,6 +81,23 @@ namespace CLIPSForms
         private string[] GetPossibleAnswer()
         {
             return answers.Keys.ToArray();
+        }
+
+        private bool NeedCheck()
+        {
+            return checkOwns.Count() != 0;
+        }
+
+        private void RefreshChecks()
+        {
+            foreach (var value in checkOwns)
+                pastChecks.Add(value);
+            checkOwns.Clear();
+        }
+
+        private void AddAssertions(List<string> assertions)
+        {
+            variableAsserts.AddRange(assertions);
         }
 
         /// <summary>
@@ -98,7 +124,15 @@ namespace CLIPSForms
             MultifieldValue damf = (MultifieldValue)fv["additional-asserts"];
             foreach (var assertion in damf)
             {
-                variableAsserts.Add(assertion.ToString().Trim(new char[] {'\\','"' }));
+                var assTrimmed = assertion.ToString().Trim(new char[] {'\\','"' });
+                if (assTrimmed.Contains("?"))
+                {
+                    var value = assTrimmed.Split()[0].Substring(1);
+                    if (!pastChecks.Contains(value))
+                        checkOwns.Add(value);
+                }
+                else
+                    variableAsserts.Add(assTrimmed);
             }
         }
 
@@ -189,7 +223,10 @@ namespace CLIPSForms
                 case InterviewState.INTERVIEW:
                     if (answers.TryGetValue(response, out string theAnswer))
                     {
-                        theString = "(" + relationAsserted + " " + theAnswer + ")";
+                        if (relationAsserted=="no")
+                            theString = "(" + theAnswer + " " + relationAsserted + ")";
+                        else
+                            theString = "(" + relationAsserted + " " + theAnswer + ")";
                         variableAsserts.Add(theString);
                         priorAnswers.Add(theAnswer);
                         break;
@@ -197,9 +234,13 @@ namespace CLIPSForms
                     else
                         return false;
                 case InterviewState.CONCLUSION:
-                    variableAsserts.Clear();
-                    priorAnswers.Clear();
-                    break;
+                    { 
+                        variableAsserts.Clear();
+                        priorAnswers.Clear();
+                        checkOwns.Clear();
+                        pastChecks.Clear();
+                        break;
+                    }
             }
 
             ProcessRules();
