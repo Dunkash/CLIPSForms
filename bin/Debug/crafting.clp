@@ -277,6 +277,7 @@
                  (create$ "(wood ?)" ))
  )
 
+
 (defrule craft-wood ""
 
    (wood no)

@@ -61,7 +61,7 @@
 
 (text-for-id 
 	(id WelcomeMessage)
-	(text "Welcome to basic crafting-based CLIPS system."))
+	(text "Welcome to basic crafting-based CLIPS system, товарищ."))
 (text-for-id 
 	(id InitialQuestion)
 	(text "What do you want to craft?"))
