@@ -30,6 +30,7 @@ namespace CLIPSForms
             SendMessage(GetMessage());
         }
 
+        
 
         /// <summary>
         /// Sends message in a string format to console.
@@ -47,8 +48,10 @@ namespace CLIPSForms
         /// </summary>
         private void SetInputOptions()
         {
-            InputField.Items.Clear();
-            InputField.Items.AddRange(GetPossibleAnswer());
+            //InputField.Items.Clear();
+            //InputField.Items.AddRange(GetPossibleAnswer());
+            Nonterminals.Items.Clear();
+            Nonterminals.Items.AddRange(GetPossibleAnswer());
             if (InputField.Items.Count!=0)
                 InputField.SelectedIndex = 0;
         }
@@ -77,6 +80,38 @@ namespace CLIPSForms
                 }
                 else
                     SendMessage("Incorrect input");
+            }
+        }
+
+        private void StartButton_Click(object sender, EventArgs e)
+        {
+            SendMessage($"Selected {Nonterminals.SelectedItems.Count} initial facts");
+            /*
+            if (NeedCheck())
+            {
+                using (var selectionBox = new SelectionBox(checkOwns))
+                {
+                    selectionBox.ShowDialog();
+                    AddAssertions(selectionBox.Result);
+                    RefreshChecks();
+                }
+            }
+            */
+            Result.Items.Clear();
+            SendMessage("Output reset");
+            AddAssertions(Nonterminals.SelectedItems);
+            EvaluateLoop();
+        }
+
+        private void EvaluateLoop()
+        {
+            InputHandler("proceed");
+            while (currentState!=InterviewState.GREETING)
+            {
+                if (currentState == InterviewState.CONCLUSION)
+                    SendMessage($"{SucessfulRules} rules were executed");
+                InputHandler("proceed");
+                SucessfulRules++;
             }
         }
     }

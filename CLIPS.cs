@@ -16,6 +16,7 @@ namespace CLIPSForms
 {
     partial class CLIPSForms : Form
     {
+        private int SucessfulRules { get; set; } = 0;
         /// <summary>
         /// Possible states are:
         /// <list type="bullet">
@@ -46,6 +47,8 @@ namespace CLIPSForms
         private String relationAsserted = null;
         private readonly List<string> variableAsserts = new List<string>();
         private readonly List<string> priorAnswers = new List<string>();
+
+        private readonly List<string> results = new List<string>();
 
         private readonly List<string> checkOwns = new List<string>();
 
@@ -97,7 +100,14 @@ namespace CLIPSForms
 
         private void AddAssertions(List<string> assertions)
         {
-            variableAsserts.AddRange(assertions);
+            foreach (var assertion in assertions)
+                variableAsserts.Add(answers[assertion]);
+        }
+
+        private void AddAssertions(ListBox.SelectedObjectCollection assertions)
+        {
+            foreach (var assertion in assertions)
+                variableAsserts.Add($"( {answers[assertion.ToString()]} )");
         }
 
         /// <summary>
@@ -133,6 +143,18 @@ namespace CLIPSForms
                 }
                 else
                     variableAsserts.Add(assTrimmed);
+            }
+        }
+
+        private void GetResults(FactAddressValue fv)
+        {
+            MultifieldValue damf = (MultifieldValue)fv["additional-asserts"];
+            foreach (var assertion in damf)
+            {
+                var assTrimmed = assertion.ToString().Trim(new char[] { '\\', '"' });
+                variableAsserts.Add(assTrimmed);
+                if (!Result.Items.Contains((((StringValue)fv["display"]).Value)))
+                Result.Items.Add(((StringValue)fv["display"]).Value);
             }
         }
 
@@ -173,7 +195,8 @@ namespace CLIPSForms
 
                 answers.Add(da.Value, va.Value);
             }
-            AdditionalAsserts(fv);
+            //AdditionalAsserts(fv);
+            GetResults(fv);
             relationAsserted = ((LexemeValue)fv["relation-asserted"]).Value;
 
             currentMessage = ((StringValue)fv["display"]).Value;
@@ -220,25 +243,26 @@ namespace CLIPSForms
             switch (currentState)
             {
                 case InterviewState.GREETING:
-                case InterviewState.INTERVIEW:
-                    if (answers.TryGetValue(response, out string theAnswer))
-                    {
-                        if (relationAsserted=="no")
-                            theString = "(" + theAnswer + " " + relationAsserted + ")";
-                        else
-                            theString = "(" + relationAsserted + " " + theAnswer + ")";
+                {
+                        theString = "(" + relationAsserted + " " + response + ")";
                         variableAsserts.Add(theString);
-                        priorAnswers.Add(theAnswer);
+                        priorAnswers.Add(response);
                         break;
-                    }
-                    else
-                        return false;
+                }
+                case InterviewState.INTERVIEW:
+                {
+                        variableAsserts.Add($"({relationAsserted})");
+                        break;
+                }
                 case InterviewState.CONCLUSION:
                     { 
                         variableAsserts.Clear();
                         priorAnswers.Clear();
                         checkOwns.Clear();
                         pastChecks.Clear();
+                        SucessfulRules = 0;
+                        answers.Clear();
+
                         break;
                     }
             }
