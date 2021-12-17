@@ -151,6 +151,7 @@ namespace CLIPSForms
             MultifieldValue damf = (MultifieldValue)fv["additional-asserts"];
             foreach (var assertion in damf)
             {
+                SucessfulRules++;
                 var assTrimmed = assertion.ToString().Trim(new char[] { '\\', '"' });
                 variableAsserts.Add(assTrimmed);
                 if (!Result.Items.Contains((((StringValue)fv["display"]).Value)))

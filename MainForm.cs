@@ -85,6 +85,7 @@ namespace CLIPSForms
 
         private void StartButton_Click(object sender, EventArgs e)
         {
+            SendMessage("Output reset");
             SendMessage($"Selected {Nonterminals.SelectedItems.Count} initial facts");
             /*
             if (NeedCheck())
@@ -98,7 +99,6 @@ namespace CLIPSForms
             }
             */
             Result.Items.Clear();
-            SendMessage("Output reset");
             AddAssertions(Nonterminals.SelectedItems);
             EvaluateLoop();
         }
@@ -111,7 +111,6 @@ namespace CLIPSForms
                 if (currentState == InterviewState.CONCLUSION)
                     SendMessage($"{SucessfulRules} rules were executed");
                 InputHandler("proceed");
-                SucessfulRules++;
             }
         }
     }
