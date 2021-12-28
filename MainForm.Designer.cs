@@ -63,18 +63,7 @@
             // 
             this.clipsSaveFileDialog.Filter = "CLIPS files|*.clp|All files|*.*";
             this.clipsSaveFileDialog.Title = "Созранить файл как...";
-            // 
-            // InputField
-            // 
-            this.InputField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.InputField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.InputField.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.InputField.FormattingEnabled = true;
-            this.InputField.Location = new System.Drawing.Point(431, 784);
-            this.InputField.Name = "InputField";
-            this.InputField.Size = new System.Drawing.Size(886, 28);
-            this.InputField.TabIndex = 1;
-            this.InputField.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputField_KeyDown);
+
             // 
             // OutputConsole
             // 

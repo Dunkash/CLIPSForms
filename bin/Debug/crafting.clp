@@ -287,7 +287,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id board)
+		(str-cat (find-text-for-id backpack) ", " (find-text-for-id wood) " => " (find-text-for-id board))
 		craftboard
 		(create$ "(board)" )))
 
@@ -301,7 +301,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id workbench)
+		(str-cat (find-text-for-id backpack) ", " (find-text-for-id board) " => " (find-text-for-id workbench))
 		craftworkbench
 		(create$ "(workbench)" )))
 
@@ -316,7 +316,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id torch)
+		(str-cat (find-text-for-id backpack) ", " (find-text-for-id stick) ", " (find-text-for-id coal) " => " (find-text-for-id torch))
 		crafttorch
 		(create$ "(torch)" )))
 
@@ -331,7 +331,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id redstonetorch)
+		(str-cat (find-text-for-id backpack) ", " (find-text-for-id stick) ", " (find-text-for-id redstone) " => " (find-text-for-id redstonetorch))
 		craftredstonetorch
 		(create$ "(redstonetorch)" )))
 
@@ -346,7 +346,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id lighter)
+		(str-cat (find-text-for-id backpack) ", " (find-text-for-id flint) ", " (find-text-for-id iron) " => " (find-text-for-id lighter))
 		craftlighter
 		(create$ "(lighter)" )))
 
@@ -360,7 +360,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id snowblock)
+		(str-cat (find-text-for-id backpack) ", " (find-text-for-id snowball) " => " (find-text-for-id snowblock))
 		craftsnowblock
 		(create$ "(snowblock)" )))
 
@@ -374,7 +374,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id clayblock)
+		(str-cat (find-text-for-id backpack) ", " (find-text-for-id clay) " => " (find-text-for-id clayblock))
 		craftclayblock
 		(create$ "(clayblock)" )))
 
@@ -389,7 +389,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id jackslamp)
+		(str-cat (find-text-for-id backpack) ", " (find-text-for-id pumpkin) ", " (find-text-for-id torch) " => " (find-text-for-id jackslamp))
 		craftjackslamp
 		(create$ "(jackslamp)" )))
 
@@ -403,7 +403,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id stonebricks)
+		(str-cat (find-text-for-id backpack) ", " (find-text-for-id stone) " => " (find-text-for-id stonebricks))
 		craftstonebricks
 		(create$ "(stonebricks)" )))
 
@@ -418,7 +418,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id mossystone)
+		(str-cat (find-text-for-id backpack) ", " (find-text-for-id stone) ", " (find-text-for-id vines) " => " (find-text-for-id mossystone))
 		craftmossystone
 		(create$ "(mossystone)" )))
 
@@ -433,7 +433,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id rodwithcarrot)
+		(str-cat (find-text-for-id backpack) ", " (find-text-for-id carrot) ", " (find-text-for-id fishingrod) " => " (find-text-for-id rodwithcarrot))
 		craftrodwithcarrot
 		(create$ "(rodwithcarrot)" )))
 
@@ -447,7 +447,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id sugar)
+		(str-cat (find-text-for-id backpack) ", " (find-text-for-id cane) " => " (find-text-for-id sugar))
 		craftsugar
 		(create$ "(sugar)" )))
 
@@ -461,7 +461,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id wheat)
+		(str-cat (find-text-for-id backpack) ", " (find-text-for-id sheafofhay) " => " (find-text-for-id wheat))
 		craftwheat
 		(create$ "(wheat)" )))
 
@@ -475,7 +475,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id firepowder)
+		(str-cat (find-text-for-id backpack) ", " (find-text-for-id firerod) " => " (find-text-for-id firepowder))
 		craftfirepowder
 		(create$ "(firepowder)" )))
 
@@ -490,7 +490,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id endermaneye)
+		(str-cat (find-text-for-id backpack) ", " (find-text-for-id endermanpearl) ", " (find-text-for-id firepowder) " => " (find-text-for-id endermaneye))
 		craftendermaneye
 		(create$ "(endermaneye)" )))
 
@@ -505,7 +505,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id lavacream)
+		(str-cat (find-text-for-id backpack) ", " (find-text-for-id slime) ", " (find-text-for-id firepowder) " => " (find-text-for-id lavacream))
 		craftlavacream
 		(create$ "(lavacream)" )))
 
@@ -520,7 +520,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id star)
+		(str-cat (find-text-for-id backpack) ", " (find-text-for-id gunpowder) ", " (find-text-for-id dye) " => " (find-text-for-id star))
 		craftstar
 		(create$ "(star)" )))
 
@@ -534,7 +534,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id stick)
+		(str-cat (find-text-for-id backpack) ", " (find-text-for-id bamboo) " => " (find-text-for-id stick))
 		craftstick
 		(create$ "(stick)" )))
 
@@ -548,7 +548,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id magmablock)
+		(str-cat (find-text-for-id backpack) ", " (find-text-for-id lavacream) " => " (find-text-for-id magmablock))
 		craftmagmablock
 		(create$ "(magmablock)" )))
 
@@ -562,7 +562,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id glowstonedust)
+		(str-cat (find-text-for-id backpack) ", " (find-text-for-id glowstone) " => " (find-text-for-id glowstonedust))
 		craftglowstonedust
 		(create$ "(glowstonedust)" )))
 
@@ -576,7 +576,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id furnace)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id stone) " => " (find-text-for-id furnace))
 		craftfurnace
 		(create$ "(furnace)" )))
 
@@ -590,7 +590,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id chest)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id wood) " => " (find-text-for-id chest))
 		craftchest
 		(create$ "(chest)" )))
 
@@ -604,7 +604,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id boiler)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) " => " (find-text-for-id boiler))
 		craftboiler
 		(create$ "(boiler)" )))
 
@@ -620,7 +620,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id meltingfurnace)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) ", " (find-text-for-id stone) ", " (find-text-for-id furnace) " => " (find-text-for-id meltingfurnace))
 		craftmeltingfurnace
 		(create$ "(meltingfurnace)" )))
 
@@ -635,7 +635,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id smokehouse)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id furnace) ", " (find-text-for-id wood) " => " (find-text-for-id smokehouse))
 		craftsmokehouse
 		(create$ "(smokehouse)" )))
 
@@ -650,7 +650,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id stonecutter)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) ", " (find-text-for-id stone) " => " (find-text-for-id stonecutter))
 		craftstonecutter
 		(create$ "(stonecutter)" )))
 
@@ -665,7 +665,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id anvil)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) ", " (find-text-for-id ironblock) " => " (find-text-for-id anvil))
 		craftanvil
 		(create$ "(anvil)" )))
 
@@ -680,7 +680,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id hive)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id wood) ", " (find-text-for-id honeycomb) " => " (find-text-for-id hive))
 		crafthive
 		(create$ "(hive)" )))
 
@@ -695,7 +695,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id blacksmithstable)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) ", " (find-text-for-id wood) " => " (find-text-for-id blacksmithstable))
 		craftblacksmithstable
 		(create$ "(blacksmithstable)" )))
 
@@ -710,7 +710,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id cartographerstable)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id paper) ", " (find-text-for-id board) " => " (find-text-for-id cartographerstable))
 		craftcartographerstable
 		(create$ "(cartographerstable)" )))
 
@@ -725,7 +725,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id archerstable)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id flint) ", " (find-text-for-id board) " => " (find-text-for-id archerstable))
 		craftarcherstable
 		(create$ "(archerstable)" )))
 
@@ -740,7 +740,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id hopper)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) ", " (find-text-for-id chest) " => " (find-text-for-id hopper))
 		crafthopper
 		(create$ "(hopper)" )))
 
@@ -755,7 +755,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id torch)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id stick) ", " (find-text-for-id coal) " => " (find-text-for-id torch))
 		crafttorch_
 		(create$ "(torch)" )))
 
@@ -770,7 +770,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id leash)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id thread) ", " (find-text-for-id slime) " => " (find-text-for-id leash))
 		craftleash
 		(create$ "(leash)" )))
 
@@ -784,7 +784,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id helmet)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id turtleshell) " => " (find-text-for-id helmet))
 		crafthelmet
 		(create$ "(helmet)" )))
 
@@ -800,7 +800,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id campfire)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id stick) ", " (find-text-for-id coal) ", " (find-text-for-id wood) " => " (find-text-for-id campfire))
 		craftcampfire
 		(create$ "(campfire)" )))
 
@@ -814,7 +814,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id ironblock)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) " => " (find-text-for-id ironblock))
 		craftironblock
 		(create$ "(ironblock)" )))
 
@@ -828,7 +828,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id goldenblock)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id gold) " => " (find-text-for-id goldenblock))
 		craftgoldenblock
 		(create$ "(goldenblock)" )))
 
@@ -842,7 +842,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id diamondblock)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id diamond) " => " (find-text-for-id diamondblock))
 		craftdiamondblock
 		(create$ "(diamondblock)" )))
 
@@ -856,7 +856,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id snowblock)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id snowball) " => " (find-text-for-id snowblock))
 		craftsnowblock_
 		(create$ "(snowblock)" )))
 
@@ -870,7 +870,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id clayblock)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id clay) " => " (find-text-for-id clayblock))
 		craftclayblock_
 		(create$ "(clayblock)" )))
 
@@ -884,7 +884,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id boneblock)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id bonemeal) " => " (find-text-for-id boneblock))
 		craftboneblock
 		(create$ "(boneblock)" )))
 
@@ -898,7 +898,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id iron)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id ironblock) " => " (find-text-for-id iron))
 		craftiron
 		(create$ "(iron)" )))
 
@@ -912,7 +912,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id gold)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id goldenblock) " => " (find-text-for-id gold))
 		craftgold
 		(create$ "(gold)" )))
 
@@ -926,7 +926,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id diamond)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id diamondblock) " => " (find-text-for-id diamond))
 		craftdiamond
 		(create$ "(diamond)" )))
 
@@ -940,7 +940,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id pumpkinpart)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id pumpkin) " => " (find-text-for-id pumpkinpart))
 		craftpumpkinpart
 		(create$ "(pumpkinpart)" )))
 
@@ -954,7 +954,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id pumpkinseed)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id pumpkinpart) " => " (find-text-for-id pumpkinseed))
 		craftpumpkinseed
 		(create$ "(pumpkinseed)" )))
 
@@ -968,7 +968,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id snowlayer)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id snowblock) " => " (find-text-for-id snowlayer))
 		craftsnowlayer
 		(create$ "(snowlayer)" )))
 
@@ -982,7 +982,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id cloth)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id thread) " => " (find-text-for-id cloth))
 		craftcloth
 		(create$ "(cloth)" )))
 
@@ -997,7 +997,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id bed)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id cloth) ", " (find-text-for-id board) " => " (find-text-for-id bed))
 		craftbed
 		(create$ "(bed)" )))
 
@@ -1012,7 +1012,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id picture)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id cloth) ", " (find-text-for-id stick) " => " (find-text-for-id picture))
 		craftpicture
 		(create$ "(picture)" )))
 
@@ -1027,7 +1027,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id lighter)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id flint) ", " (find-text-for-id iron) " => " (find-text-for-id lighter))
 		craftlighter_
 		(create$ "(lighter)" )))
 
@@ -1042,7 +1042,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id watch)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id gold) ", " (find-text-for-id redstone) " => " (find-text-for-id watch))
 		craftwatch
 		(create$ "(watch)" )))
 
@@ -1057,7 +1057,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id compass)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) ", " (find-text-for-id redstone) " => " (find-text-for-id compass))
 		craftcompass
 		(create$ "(compass)" )))
 
@@ -1072,7 +1072,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id map)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id paper) ", " (find-text-for-id compass) " => " (find-text-for-id map))
 		craftmap
 		(create$ "(map)" )))
 
@@ -1087,7 +1087,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id fishingrod)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id stick) ", " (find-text-for-id thread) " => " (find-text-for-id fishingrod))
 		craftfishingrod
 		(create$ "(fishingrod)" )))
 
@@ -1102,7 +1102,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id woodenpickaxe)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id wood) ", " (find-text-for-id stick) " => " (find-text-for-id woodenpickaxe))
 		craftwoodenpickaxe
 		(create$ "(woodenpickaxe)" )))
 
@@ -1117,7 +1117,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id stonepickaxe)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id stone) ", " (find-text-for-id stick) " => " (find-text-for-id stonepickaxe))
 		craftstonepickaxe
 		(create$ "(stonepickaxe)" )))
 
@@ -1132,7 +1132,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id ironpickaxe)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) ", " (find-text-for-id stick) " => " (find-text-for-id ironpickaxe))
 		craftironpickaxe
 		(create$ "(ironpickaxe)" )))
 
@@ -1147,7 +1147,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id goldenpickaxe)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id gold) ", " (find-text-for-id stick) " => " (find-text-for-id goldenpickaxe))
 		craftgoldenpickaxe
 		(create$ "(goldenpickaxe)" )))
 
@@ -1162,7 +1162,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id diamondpickaxe)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id diamond) ", " (find-text-for-id stick) " => " (find-text-for-id diamondpickaxe))
 		craftdiamondpickaxe
 		(create$ "(diamondpickaxe)" )))
 
@@ -1177,7 +1177,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id netherite)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id netheritescrap) ", " (find-text-for-id gold) " => " (find-text-for-id netherite))
 		craftnetherite
 		(create$ "(netherite)" )))
 
@@ -1193,7 +1193,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id arrow)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id flint) ", " (find-text-for-id stick) ", " (find-text-for-id feather) " => " (find-text-for-id arrow))
 		craftarrow
 		(create$ "(arrow)" )))
 
@@ -1208,7 +1208,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id ghostarrow)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id glowstonedust) ", " (find-text-for-id arrow) " => " (find-text-for-id ghostarrow))
 		craftghostarrow
 		(create$ "(ghostarrow)" )))
 
@@ -1223,7 +1223,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id tnt)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id gunpowder) ", " (find-text-for-id sand) " => " (find-text-for-id tnt))
 		crafttnt
 		(create$ "(tnt)" )))
 
@@ -1238,7 +1238,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id jackslamp)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id pumpkin) ", " (find-text-for-id torch) " => " (find-text-for-id jackslamp))
 		craftjackslamp_
 		(create$ "(jackslamp)" )))
 
@@ -1252,7 +1252,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id slimeblock)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id slime) " => " (find-text-for-id slimeblock))
 		craftslimeblock
 		(create$ "(slimeblock)" )))
 
@@ -1267,7 +1267,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id mossystone)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id stone) ", " (find-text-for-id vines) " => " (find-text-for-id mossystone))
 		craftmossystone_
 		(create$ "(mossystone)" )))
 
@@ -1282,7 +1282,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id redstonetorch)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id stick) ", " (find-text-for-id redstone) " => " (find-text-for-id redstonetorch))
 		craftredstonetorch_
 		(create$ "(redstonetorch)" )))
 
@@ -1298,7 +1298,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id repeater)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id redstone) ", " (find-text-for-id redstonetorch) ", " (find-text-for-id stone) " => " (find-text-for-id repeater))
 		craftrepeater
 		(create$ "(repeater)" )))
 
@@ -1313,7 +1313,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id cookies)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id beans) ", " (find-text-for-id wheat) " => " (find-text-for-id cookies))
 		craftcookies
 		(create$ "(cookies)" )))
 
@@ -1327,7 +1327,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id bread)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id wheat) " => " (find-text-for-id bread))
 		craftbread
 		(create$ "(bread)" )))
 
@@ -1341,7 +1341,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id sugar)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id cane) " => " (find-text-for-id sugar))
 		craftsugar_
 		(create$ "(sugar)" )))
 
@@ -1358,7 +1358,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id cake)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id milk) ", " (find-text-for-id wheat) ", " (find-text-for-id egg) ", " (find-text-for-id sugar) " => " (find-text-for-id cake))
 		craftcake
 		(create$ "(cake)" )))
 
@@ -1373,7 +1373,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id goldenapple)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id goldenblock) ", " (find-text-for-id apple) " => " (find-text-for-id goldenapple))
 		craftgoldenapple
 		(create$ "(goldenapple)" )))
 
@@ -1389,7 +1389,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id pumpkinpie)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id pumpkin) ", " (find-text-for-id egg) ", " (find-text-for-id sugar) " => " (find-text-for-id pumpkinpie))
 		craftpumpkinpie
 		(create$ "(pumpkinpie)" )))
 
@@ -1403,7 +1403,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id sheafofhay)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id wheat) " => " (find-text-for-id sheafofhay))
 		craftsheafofhay
 		(create$ "(sheafofhay)" )))
 
@@ -1417,7 +1417,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id wheat)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id sheafofhay) " => " (find-text-for-id wheat))
 		craftwheat_
 		(create$ "(wheat)" )))
 
@@ -1431,7 +1431,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id paper)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id bamboo) " => " (find-text-for-id paper))
 		craftpaper
 		(create$ "(paper)" )))
 
@@ -1446,7 +1446,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id stage)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id bamboo) ", " (find-text-for-id thread) " => " (find-text-for-id stage))
 		craftstage
 		(create$ "(stage)" )))
 
@@ -1460,7 +1460,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id book)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id paper) " => " (find-text-for-id book))
 		craftbook
 		(create$ "(book)" )))
 
@@ -1474,7 +1474,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id firepowder)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id firerod) " => " (find-text-for-id firepowder))
 		craftfirepowder_
 		(create$ "(firepowder)" )))
 
@@ -1489,7 +1489,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id endermaneye)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id endermanpearl) ", " (find-text-for-id firepowder) " => " (find-text-for-id endermaneye))
 		craftendermaneye_
 		(create$ "(endermaneye)" )))
 
@@ -1504,7 +1504,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id lavacream)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id slime) ", " (find-text-for-id firepowder) " => " (find-text-for-id lavacream))
 		craftlavacream_
 		(create$ "(lavacream)" )))
 
@@ -1520,7 +1520,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id fireball)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id firepowder) ", " (find-text-for-id gunpowder) ", " (find-text-for-id coal) " => " (find-text-for-id fireball))
 		craftfireball
 		(create$ "(fireball)" )))
 
@@ -1536,7 +1536,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id editablebook)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id feather) ", " (find-text-for-id dye) ", " (find-text-for-id book) " => " (find-text-for-id editablebook))
 		crafteditablebook
 		(create$ "(editablebook)" )))
 
@@ -1551,7 +1551,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id star)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id gunpowder) ", " (find-text-for-id dye) " => " (find-text-for-id star))
 		craftstar_
 		(create$ "(star)" )))
 
@@ -1567,7 +1567,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id rocket)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id star) ", " (find-text-for-id paper) ", " (find-text-for-id gunpowder) " => " (find-text-for-id rocket))
 		craftrocket
 		(create$ "(rocket)" )))
 
@@ -1582,7 +1582,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id greydye)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id ink) ", " (find-text-for-id bonemeal) " => " (find-text-for-id greydye))
 		craftgreydye
 		(create$ "(greydye)" )))
 
@@ -1596,7 +1596,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id magmablock)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id lavacream) " => " (find-text-for-id magmablock))
 		craftmagmablock_
 		(create$ "(magmablock)" )))
 
@@ -1610,7 +1610,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id glowstone)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id glowstonedust) " => " (find-text-for-id glowstone))
 		craftglowstone
 		(create$ "(glowstone)" )))
 
@@ -1624,7 +1624,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id glowstonedust)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id glowstone) " => " (find-text-for-id glowstonedust))
 		craftglowstonedust_
 		(create$ "(glowstonedust)" )))
 
@@ -1639,7 +1639,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id library)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id board) ", " (find-text-for-id book) " => " (find-text-for-id library))
 		craftlibrary
 		(create$ "(library)" )))
 
@@ -1654,7 +1654,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id cathedral)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id board) ", " (find-text-for-id library) " => " (find-text-for-id cathedral))
 		craftcathedral
 		(create$ "(cathedral)" )))
 
@@ -1669,7 +1669,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id musicbox)
+		(str-cat (find-text-for-id workbench) ", " (find-text-for-id board) ", " (find-text-for-id diamond) " => " (find-text-for-id musicbox))
 		craftmusicbox
 		(create$ "(musicbox)" )))
 
@@ -1685,7 +1685,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id glass)
+		(str-cat (find-text-for-id furnace) ", " (find-text-for-id sand) ", " (find-text-for-id fire) ", " (find-text-for-id coal) " => " (find-text-for-id glass))
 		craftglass
 		(create$ "(glass)" )))
 
@@ -1701,7 +1701,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id glass)
+		(str-cat (find-text-for-id furnace) ", " (find-text-for-id sand) ", " (find-text-for-id fire) ", " (find-text-for-id wood) " => " (find-text-for-id glass))
 		craftglass_
 		(create$ "(glass)" )))
 
@@ -1717,7 +1717,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id glass)
+		(str-cat (find-text-for-id furnace) ", " (find-text-for-id sand) ", " (find-text-for-id fire) ", " (find-text-for-id board) " => " (find-text-for-id glass))
 		craftglass__
 		(create$ "(glass)" )))
 
@@ -1733,7 +1733,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id iron)
+		(str-cat (find-text-for-id furnace) ", " (find-text-for-id ironore) ", " (find-text-for-id fire) ", " (find-text-for-id coal) " => " (find-text-for-id iron))
 		craftiron_
 		(create$ "(iron)" )))
 
@@ -1749,7 +1749,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id iron)
+		(str-cat (find-text-for-id furnace) ", " (find-text-for-id ironore) ", " (find-text-for-id fire) ", " (find-text-for-id wood) " => " (find-text-for-id iron))
 		craftiron__
 		(create$ "(iron)" )))
 
@@ -1765,7 +1765,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id iron)
+		(str-cat (find-text-for-id furnace) ", " (find-text-for-id ironore) ", " (find-text-for-id fire) ", " (find-text-for-id board) " => " (find-text-for-id iron))
 		craftiron___
 		(create$ "(iron)" )))
 
@@ -1781,7 +1781,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id gold)
+		(str-cat (find-text-for-id furnace) ", " (find-text-for-id goldenore) ", " (find-text-for-id fire) ", " (find-text-for-id coal) " => " (find-text-for-id gold))
 		craftgold_
 		(create$ "(gold)" )))
 
@@ -1797,7 +1797,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id gold)
+		(str-cat (find-text-for-id furnace) ", " (find-text-for-id goldenore) ", " (find-text-for-id fire) ", " (find-text-for-id wood) " => " (find-text-for-id gold))
 		craftgold__
 		(create$ "(gold)" )))
 
@@ -1813,7 +1813,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id gold)
+		(str-cat (find-text-for-id furnace) ", " (find-text-for-id goldenore) ", " (find-text-for-id fire) ", " (find-text-for-id board) " => " (find-text-for-id gold))
 		craftgold___
 		(create$ "(gold)" )))
 
@@ -1829,7 +1829,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id netheritescrap)
+		(str-cat (find-text-for-id furnace) ", " (find-text-for-id ancientwreckage) ", " (find-text-for-id fire) ", " (find-text-for-id coal) " => " (find-text-for-id netheritescrap))
 		craftnetheritescrap
 		(create$ "(netheritescrap)" )))
 
@@ -1845,7 +1845,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id netheritescrap)
+		(str-cat (find-text-for-id furnace) ", " (find-text-for-id ancientwreckage) ", " (find-text-for-id fire) ", " (find-text-for-id wood) " => " (find-text-for-id netheritescrap))
 		craftnetheritescrap_
 		(create$ "(netheritescrap)" )))
 
@@ -1861,7 +1861,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id netheritescrap)
+		(str-cat (find-text-for-id furnace) ", " (find-text-for-id ancientwreckage) ", " (find-text-for-id fire) ", " (find-text-for-id board) " => " (find-text-for-id netheritescrap))
 		craftnetheritescrap__
 		(create$ "(netheritescrap)" )))
 
@@ -1877,7 +1877,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id bakedclay)
+		(str-cat (find-text-for-id furnace) ", " (find-text-for-id clay) ", " (find-text-for-id fire) ", " (find-text-for-id coal) " => " (find-text-for-id bakedclay))
 		craftbakedclay
 		(create$ "(bakedclay)" )))
 
@@ -1893,7 +1893,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id bakedclay)
+		(str-cat (find-text-for-id furnace) ", " (find-text-for-id clay) ", " (find-text-for-id fire) ", " (find-text-for-id wood) " => " (find-text-for-id bakedclay))
 		craftbakedclay_
 		(create$ "(bakedclay)" )))
 
@@ -1909,7 +1909,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id bakedclay)
+		(str-cat (find-text-for-id furnace) ", " (find-text-for-id clay) ", " (find-text-for-id fire) ", " (find-text-for-id board) " => " (find-text-for-id bakedclay))
 		craftbakedclay__
 		(create$ "(bakedclay)" )))
 
@@ -1925,7 +1925,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id driedkelp)
+		(str-cat (find-text-for-id furnace) ", " (find-text-for-id laminaria) ", " (find-text-for-id fire) ", " (find-text-for-id coal) " => " (find-text-for-id driedkelp))
 		craftdriedkelp
 		(create$ "(driedkelp)" )))
 
@@ -1941,7 +1941,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id driedkelp)
+		(str-cat (find-text-for-id furnace) ", " (find-text-for-id laminaria) ", " (find-text-for-id fire) ", " (find-text-for-id wood) " => " (find-text-for-id driedkelp))
 		craftdriedkelp_
 		(create$ "(driedkelp)" )))
 
@@ -1957,7 +1957,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id driedkelp)
+		(str-cat (find-text-for-id furnace) ", " (find-text-for-id laminaria) ", " (find-text-for-id fire) ", " (find-text-for-id board) " => " (find-text-for-id driedkelp))
 		craftdriedkelp__
 		(create$ "(driedkelp)" )))
 
@@ -1972,7 +1972,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id netheritepickaxe)
+		(str-cat (find-text-for-id blacksmithstable) ", " (find-text-for-id netherite) ", " (find-text-for-id pickaxe) " => " (find-text-for-id netheritepickaxe))
 		craftnetheritepickaxe
 		(create$ "(netheritepickaxe)" )))
 
@@ -1986,7 +1986,7 @@
 
 		(handle-state interview
 		?*target*
-		(find-text-for-id fish)
+		(str-cat (find-text-for-id water) ", " (find-text-for-id fishingrod) " => " (find-text-for-id fish))
 		craftfish
 		(create$ "(fish)" )))
 

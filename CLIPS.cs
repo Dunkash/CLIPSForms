@@ -86,24 +86,10 @@ namespace CLIPSForms
             return answers.Keys.ToArray();
         }
 
-        private bool NeedCheck()
-        {
-            return checkOwns.Count() != 0;
-        }
-
-        private void RefreshChecks()
-        {
-            foreach (var value in checkOwns)
-                pastChecks.Add(value);
-            checkOwns.Clear();
-        }
-
-        private void AddAssertions(List<string> assertions)
-        {
-            foreach (var assertion in assertions)
-                variableAsserts.Add(answers[assertion]);
-        }
-
+        /// <summary>
+        /// Adds assertions to list of evaluating assertions.
+        /// </summary>
+        /// <param name="assertions">assertion command to add</param>
         private void AddAssertions(ListBox.SelectedObjectCollection assertions)
         {
             foreach (var assertion in assertions)
@@ -146,6 +132,10 @@ namespace CLIPSForms
             }
         }
 
+        /// <summary>
+        /// Extracts result from proxy facts, and inserts them 
+        /// </summary>
+        /// <param name="fv">fact adress, containing required multislot</param>
         private void GetResults(FactAddressValue fv)
         {
             MultifieldValue damf = (MultifieldValue)fv["additional-asserts"];
@@ -155,7 +145,21 @@ namespace CLIPSForms
                 var assTrimmed = assertion.ToString().Trim(new char[] { '\\', '"' });
                 variableAsserts.Add(assTrimmed);
                 if (!Result.Items.Contains((((StringValue)fv["display"]).Value)))
-                Result.Items.Add(((StringValue)fv["display"]).Value);
+                    Result.Items.Add(((StringValue)fv["display"]).Value);
+            }
+        }
+
+        /// <summary>
+        /// Evaluatess CLIPS evaluation results, and repeats call, untill CLIPS returns "conclusion" state as result
+        /// </summary>
+        private void EvaluateLoop()
+        {
+            InputHandler("proceed");
+            while (currentState != InterviewState.GREETING)
+            {
+                if (currentState == InterviewState.CONCLUSION)
+                    SendMessage($"{SucessfulRules} rules were executed");
+                InputHandler("proceed");
             }
         }
 

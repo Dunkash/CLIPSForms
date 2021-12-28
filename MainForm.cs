@@ -56,62 +56,15 @@ namespace CLIPSForms
                 InputField.SelectedIndex = 0;
         }
 
-        /// <summary>
-        /// Processes console input
-        /// </summary>
-        private void InputField_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                SendMessage(InputField.Text);
-                if (NeedCheck())
-                {
-                    using (var selectionBox = new SelectionBox(checkOwns))
-                    {
-                        selectionBox.ShowDialog();
-                        AddAssertions(selectionBox.Result);
-                        RefreshChecks();
-                    }
-                }
-                if (InputHandler(InputField.Text))
-                {
-                    SetInputOptions();
-                    SendMessage(GetMessage());
-                }
-                else
-                    SendMessage("Incorrect input");
-            }
-        }
-
         private void StartButton_Click(object sender, EventArgs e)
         {
             SendMessage("Output reset");
             SendMessage($"Selected {Nonterminals.SelectedItems.Count} initial facts");
-            /*
-            if (NeedCheck())
-            {
-                using (var selectionBox = new SelectionBox(checkOwns))
-                {
-                    selectionBox.ShowDialog();
-                    AddAssertions(selectionBox.Result);
-                    RefreshChecks();
-                }
-            }
-            */
             Result.Items.Clear();
             AddAssertions(Nonterminals.SelectedItems);
             EvaluateLoop();
         }
 
-        private void EvaluateLoop()
-        {
-            InputHandler("proceed");
-            while (currentState!=InterviewState.GREETING)
-            {
-                if (currentState == InterviewState.CONCLUSION)
-                    SendMessage($"{SucessfulRules} rules were executed");
-                InputHandler("proceed");
-            }
-        }
+
     }
 }
