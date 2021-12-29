@@ -58,13 +58,42 @@ namespace CLIPSForms
 
         private void StartButton_Click(object sender, EventArgs e)
         {
+            if (currentAssertion != "" && !chancedAssertions.ContainsKey(currentAssertion))
+                chancedAssertions.Add(currentAssertion, trackBar1.Value * 0.05);
             SendMessage("Output reset");
             SendMessage($"Selected {Nonterminals.SelectedItems.Count} initial facts");
             Result.Items.Clear();
-            AddAssertions(Nonterminals.SelectedItems);
+            //AddAssertions(Nonterminals.SelectedItems);
+            AddAssertions();
             EvaluateLoop();
+            SendMessage("\n");
         }
 
+        private void Nonterminals_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var temp = ToList(Nonterminals.SelectedItems);
+            if (temp.Except(previous).Count()==0)
+            {
+                var t = previous.Except(temp).First();
+                if (currentAssertion != "" && !chancedAssertions.ContainsKey(currentAssertion))
+                {
+                    chancedAssertions.Add(currentAssertion, trackBar1.Value * 0.05);
+                }
+                currentAssertion = "";
+                chancedAssertions.Remove(t);
+            }
+            else
+            {
+                var t = (temp.Except(previous).First());
+                if (currentAssertion != "" && !chancedAssertions.ContainsKey(currentAssertion))
+                {
+                    chancedAssertions.Add(currentAssertion, trackBar1.Value * 0.05);
+                }
+                currentAssertion = t;
+            }
 
+            previous = temp;
+            trackBar1.Value = 18;
+        }
     }
 }

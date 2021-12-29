@@ -12,7 +12,7 @@
 	(text "proceed"))
 (text-for-id
 	(id WelcomeMessage)
-	(text "Welcome to basic crafting-based CLIPS system, товарищ."))
+	(text "Welcome to basic crafting-based CLIPS system."))
 (text-for-id
 	(id End)
 	(text "Evaluation completed"))

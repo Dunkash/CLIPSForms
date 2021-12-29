@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Globalization;
 
 using CLIPSNET;
 
@@ -53,7 +54,10 @@ namespace CLIPSForms
         private readonly List<string> checkOwns = new List<string>();
 
         private readonly HashSet<string> pastChecks = new HashSet<string>();
+        private List<string> previous = new List<string>();
+        private readonly Dictionary<string,double> chancedAssertions = new Dictionary<string, double>();
 
+        private string currentAssertion = "";
 
         /// <summary>
         /// List of currently possible answers, as well as CLIPS commands, connected to them
@@ -61,11 +65,6 @@ namespace CLIPSForms
         private Dictionary<string, string> answers = null;
 
         private string currentMessage = "";
-
-        public List<string> CheckOwns
-        {
-            get => checkOwns;
-        }
 
         ///<summary> 
         ///Loads initial CLIPS files, required for basic functions, then resets envinronment to insert files into CLIPS envinronment. 
@@ -75,6 +74,24 @@ namespace CLIPSForms
             clips.Load(@"crafting.clp");
             clips.Load(@"crafting_en.clp");
             clips.Reset();
+        }
+
+        private void AddAssertions()
+        {
+            foreach (var pair in chancedAssertions)
+            {
+                variableAsserts.Add($"{pair.Key} {pair.Value.ToString(CultureInfo.InvariantCulture)}");
+            }
+        }
+
+        private List<string> ToList(ListBox.SelectedObjectCollection objectCollection)
+        {
+            var res = new List<string>();
+            foreach (var obj in objectCollection)
+            {
+                res.Add(obj.ToString());
+            }
+            return res;
         }
 
         /// <summary>
@@ -93,7 +110,7 @@ namespace CLIPSForms
         private void AddAssertions(ListBox.SelectedObjectCollection assertions)
         {
             foreach (var assertion in assertions)
-                variableAsserts.Add($"( {answers[assertion.ToString()]} )");
+                variableAsserts.Add($" {answers[assertion.ToString()]} 0.9");
         }
 
         /// <summary>
@@ -104,8 +121,10 @@ namespace CLIPSForms
             clips.Reset();
             foreach (String factString in variableAsserts)
             {
-                String assertCommand = "(assert " + factString + ")";
-                clips.Eval(assertCommand);
+                if (!factString.Contains("craft") && !factString.Contains("proceed"))
+                    clips.Eval("(assert (" +  factString + ") )");
+                else
+                    clips.Eval("(assert " + factString + ")");
             }
             clips.Run();
             HandleResponse();
@@ -142,7 +161,7 @@ namespace CLIPSForms
             foreach (var assertion in damf)
             {
                 SucessfulRules++;
-                var assTrimmed = assertion.ToString().Trim(new char[] { '\\', '"' });
+                var assTrimmed = assertion.ToString().Trim(new char[] { '\\', '"', '(',')' });
                 variableAsserts.Add(assTrimmed);
                 if (!Result.Items.Contains((((StringValue)fv["display"]).Value)))
                     Result.Items.Add(((StringValue)fv["display"]).Value);
@@ -154,12 +173,17 @@ namespace CLIPSForms
         /// </summary>
         private void EvaluateLoop()
         {
+            int loops = 0;
             InputHandler("proceed");
             while (currentState != InterviewState.GREETING)
             {
                 if (currentState == InterviewState.CONCLUSION)
-                    SendMessage($"{SucessfulRules} rules were executed");
+                {
+                    SendMessage($"{loops} rules tried");
+                    SendMessage($"{SucessfulRules} of them were sucessfuly executed");
+                }
                 InputHandler("proceed");
+                loops++;
             }
         }
 

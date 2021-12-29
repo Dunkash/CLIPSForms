@@ -239,6 +239,17 @@
                      (additional-asserts ?additional-asserts)))
    (halt))
 
+      (defmethod handle-state ((?state SYMBOL (eq ?state interview))
+                         (?target SYMBOL (eq ?target gui))
+                         (?message LEXEME)
+                         (?relation-asserted SYMBOL))
+   (assert (UI-state (display ?message)
+                     (relation-asserted ?relation-asserted)
+                     (state ?state)
+                     (valid-answers)
+                     (display-answers)
+                     (additional-asserts)))
+   (halt))
  
 (defmethod handle-state ((?state SYMBOL (eq ?state conclusion))
                          (?target SYMBOL (eq ?target gui))
@@ -279,1714 +290,3209 @@
 
 (defrule craft-board ""
 
-	(backpack)
-	(wood)
+	(backpack ?v0)
+	(wood ?v1)
 	(not (craftboard))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id backpack) ", " (find-text-for-id wood) " => " (find-text-for-id board))
-		craftboard
-		(create$ "(board)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id backpack) ", " (find-text-for-id wood) " => " (find-text-for-id board) "  " (* 100 ?v0 ?v1 ) "%")
+			craftboard
+			(create$ (str-cat "(board " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftboard
+		)
+	)	
+)
 
 (defrule craft-workbench ""
 
-	(backpack)
-	(board)
+	(backpack ?v0)
+	(board ?v1)
 	(not (craftworkbench))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id backpack) ", " (find-text-for-id board) " => " (find-text-for-id workbench))
-		craftworkbench
-		(create$ "(workbench)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id backpack) ", " (find-text-for-id board) " => " (find-text-for-id workbench) "  " (* 100 ?v0 ?v1 ) "%")
+			craftworkbench
+			(create$ (str-cat "(workbench " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftworkbench
+		)
+	)	
+)
 
 (defrule craft-torch ""
 
-	(backpack)
-	(stick)
-	(coal)
+	(backpack ?v0)
+	(stick ?v1)
+	(coal ?v2)
 	(not (crafttorch))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id backpack) ", " (find-text-for-id stick) ", " (find-text-for-id coal) " => " (find-text-for-id torch))
-		crafttorch
-		(create$ "(torch)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id backpack) ", " (find-text-for-id stick) ", " (find-text-for-id coal) " => " (find-text-for-id torch) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			crafttorch
+			(create$ (str-cat "(torch " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			crafttorch
+		)
+	)	
+)
 
 (defrule craft-redstonetorch ""
 
-	(backpack)
-	(stick)
-	(redstone)
+	(backpack ?v0)
+	(stick ?v1)
+	(redstone ?v2)
 	(not (craftredstonetorch))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id backpack) ", " (find-text-for-id stick) ", " (find-text-for-id redstone) " => " (find-text-for-id redstonetorch))
-		craftredstonetorch
-		(create$ "(redstonetorch)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id backpack) ", " (find-text-for-id stick) ", " (find-text-for-id redstone) " => " (find-text-for-id redstonetorch) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftredstonetorch
+			(create$ (str-cat "(redstonetorch " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftredstonetorch
+		)
+	)	
+)
 
 (defrule craft-lighter ""
 
-	(backpack)
-	(flint)
-	(iron)
+	(backpack ?v0)
+	(flint ?v1)
+	(iron ?v2)
 	(not (craftlighter))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id backpack) ", " (find-text-for-id flint) ", " (find-text-for-id iron) " => " (find-text-for-id lighter))
-		craftlighter
-		(create$ "(lighter)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id backpack) ", " (find-text-for-id flint) ", " (find-text-for-id iron) " => " (find-text-for-id lighter) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftlighter
+			(create$ (str-cat "(lighter " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftlighter
+		)
+	)	
+)
 
 (defrule craft-snowblock ""
 
-	(backpack)
-	(snowball)
+	(backpack ?v0)
+	(snowball ?v1)
 	(not (craftsnowblock))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id backpack) ", " (find-text-for-id snowball) " => " (find-text-for-id snowblock))
-		craftsnowblock
-		(create$ "(snowblock)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id backpack) ", " (find-text-for-id snowball) " => " (find-text-for-id snowblock) "  " (* 100 ?v0 ?v1 ) "%")
+			craftsnowblock
+			(create$ (str-cat "(snowblock " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftsnowblock
+		)
+	)	
+)
 
 (defrule craft-clayblock ""
 
-	(backpack)
-	(clay)
+	(backpack ?v0)
+	(clay ?v1)
 	(not (craftclayblock))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id backpack) ", " (find-text-for-id clay) " => " (find-text-for-id clayblock))
-		craftclayblock
-		(create$ "(clayblock)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id backpack) ", " (find-text-for-id clay) " => " (find-text-for-id clayblock) "  " (* 100 ?v0 ?v1 ) "%")
+			craftclayblock
+			(create$ (str-cat "(clayblock " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftclayblock
+		)
+	)	
+)
 
 (defrule craft-jackslamp ""
 
-	(backpack)
-	(pumpkin)
-	(torch)
+	(backpack ?v0)
+	(pumpkin ?v1)
+	(torch ?v2)
 	(not (craftjackslamp))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id backpack) ", " (find-text-for-id pumpkin) ", " (find-text-for-id torch) " => " (find-text-for-id jackslamp))
-		craftjackslamp
-		(create$ "(jackslamp)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id backpack) ", " (find-text-for-id pumpkin) ", " (find-text-for-id torch) " => " (find-text-for-id jackslamp) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftjackslamp
+			(create$ (str-cat "(jackslamp " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftjackslamp
+		)
+	)	
+)
 
 (defrule craft-stonebricks ""
 
-	(backpack)
-	(stone)
+	(backpack ?v0)
+	(stone ?v1)
 	(not (craftstonebricks))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id backpack) ", " (find-text-for-id stone) " => " (find-text-for-id stonebricks))
-		craftstonebricks
-		(create$ "(stonebricks)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id backpack) ", " (find-text-for-id stone) " => " (find-text-for-id stonebricks) "  " (* 100 ?v0 ?v1 ) "%")
+			craftstonebricks
+			(create$ (str-cat "(stonebricks " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftstonebricks
+		)
+	)	
+)
 
 (defrule craft-mossystone ""
 
-	(backpack)
-	(stone)
-	(vines)
+	(backpack ?v0)
+	(stone ?v1)
+	(vines ?v2)
 	(not (craftmossystone))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id backpack) ", " (find-text-for-id stone) ", " (find-text-for-id vines) " => " (find-text-for-id mossystone))
-		craftmossystone
-		(create$ "(mossystone)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id backpack) ", " (find-text-for-id stone) ", " (find-text-for-id vines) " => " (find-text-for-id mossystone) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftmossystone
+			(create$ (str-cat "(mossystone " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftmossystone
+		)
+	)	
+)
 
 (defrule craft-rodwithcarrot ""
 
-	(backpack)
-	(carrot)
-	(fishingrod)
+	(backpack ?v0)
+	(carrot ?v1)
+	(fishingrod ?v2)
 	(not (craftrodwithcarrot))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id backpack) ", " (find-text-for-id carrot) ", " (find-text-for-id fishingrod) " => " (find-text-for-id rodwithcarrot))
-		craftrodwithcarrot
-		(create$ "(rodwithcarrot)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id backpack) ", " (find-text-for-id carrot) ", " (find-text-for-id fishingrod) " => " (find-text-for-id rodwithcarrot) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftrodwithcarrot
+			(create$ (str-cat "(rodwithcarrot " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftrodwithcarrot
+		)
+	)	
+)
 
 (defrule craft-sugar ""
 
-	(backpack)
-	(cane)
+	(backpack ?v0)
+	(cane ?v1)
 	(not (craftsugar))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id backpack) ", " (find-text-for-id cane) " => " (find-text-for-id sugar))
-		craftsugar
-		(create$ "(sugar)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id backpack) ", " (find-text-for-id cane) " => " (find-text-for-id sugar) "  " (* 100 ?v0 ?v1 ) "%")
+			craftsugar
+			(create$ (str-cat "(sugar " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftsugar
+		)
+	)	
+)
 
 (defrule craft-wheat ""
 
-	(backpack)
-	(sheafofhay)
+	(backpack ?v0)
+	(sheafofhay ?v1)
 	(not (craftwheat))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id backpack) ", " (find-text-for-id sheafofhay) " => " (find-text-for-id wheat))
-		craftwheat
-		(create$ "(wheat)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id backpack) ", " (find-text-for-id sheafofhay) " => " (find-text-for-id wheat) "  " (* 100 ?v0 ?v1 ) "%")
+			craftwheat
+			(create$ (str-cat "(wheat " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftwheat
+		)
+	)	
+)
 
 (defrule craft-firepowder ""
 
-	(backpack)
-	(firerod)
+	(backpack ?v0)
+	(firerod ?v1)
 	(not (craftfirepowder))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id backpack) ", " (find-text-for-id firerod) " => " (find-text-for-id firepowder))
-		craftfirepowder
-		(create$ "(firepowder)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id backpack) ", " (find-text-for-id firerod) " => " (find-text-for-id firepowder) "  " (* 100 ?v0 ?v1 ) "%")
+			craftfirepowder
+			(create$ (str-cat "(firepowder " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftfirepowder
+		)
+	)	
+)
 
 (defrule craft-endermaneye ""
 
-	(backpack)
-	(endermanpearl)
-	(firepowder)
+	(backpack ?v0)
+	(endermanpearl ?v1)
+	(firepowder ?v2)
 	(not (craftendermaneye))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id backpack) ", " (find-text-for-id endermanpearl) ", " (find-text-for-id firepowder) " => " (find-text-for-id endermaneye))
-		craftendermaneye
-		(create$ "(endermaneye)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id backpack) ", " (find-text-for-id endermanpearl) ", " (find-text-for-id firepowder) " => " (find-text-for-id endermaneye) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftendermaneye
+			(create$ (str-cat "(endermaneye " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftendermaneye
+		)
+	)	
+)
 
 (defrule craft-lavacream ""
 
-	(backpack)
-	(slime)
-	(firepowder)
+	(backpack ?v0)
+	(slime ?v1)
+	(firepowder ?v2)
 	(not (craftlavacream))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id backpack) ", " (find-text-for-id slime) ", " (find-text-for-id firepowder) " => " (find-text-for-id lavacream))
-		craftlavacream
-		(create$ "(lavacream)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id backpack) ", " (find-text-for-id slime) ", " (find-text-for-id firepowder) " => " (find-text-for-id lavacream) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftlavacream
+			(create$ (str-cat "(lavacream " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftlavacream
+		)
+	)	
+)
 
 (defrule craft-star ""
 
-	(backpack)
-	(gunpowder)
-	(dye)
+	(backpack ?v0)
+	(gunpowder ?v1)
+	(dye ?v2)
 	(not (craftstar))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id backpack) ", " (find-text-for-id gunpowder) ", " (find-text-for-id dye) " => " (find-text-for-id star))
-		craftstar
-		(create$ "(star)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id backpack) ", " (find-text-for-id gunpowder) ", " (find-text-for-id dye) " => " (find-text-for-id star) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftstar
+			(create$ (str-cat "(star " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftstar
+		)
+	)	
+)
 
 (defrule craft-stick ""
 
-	(backpack)
-	(bamboo)
+	(backpack ?v0)
+	(bamboo ?v1)
 	(not (craftstick))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id backpack) ", " (find-text-for-id bamboo) " => " (find-text-for-id stick))
-		craftstick
-		(create$ "(stick)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id backpack) ", " (find-text-for-id bamboo) " => " (find-text-for-id stick) "  " (* 100 ?v0 ?v1 ) "%")
+			craftstick
+			(create$ (str-cat "(stick " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftstick
+		)
+	)	
+)
 
 (defrule craft-magmablock ""
 
-	(backpack)
-	(lavacream)
+	(backpack ?v0)
+	(lavacream ?v1)
 	(not (craftmagmablock))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id backpack) ", " (find-text-for-id lavacream) " => " (find-text-for-id magmablock))
-		craftmagmablock
-		(create$ "(magmablock)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id backpack) ", " (find-text-for-id lavacream) " => " (find-text-for-id magmablock) "  " (* 100 ?v0 ?v1 ) "%")
+			craftmagmablock
+			(create$ (str-cat "(magmablock " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftmagmablock
+		)
+	)	
+)
 
 (defrule craft-glowstonedust ""
 
-	(backpack)
-	(glowstone)
+	(backpack ?v0)
+	(glowstone ?v1)
 	(not (craftglowstonedust))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id backpack) ", " (find-text-for-id glowstone) " => " (find-text-for-id glowstonedust))
-		craftglowstonedust
-		(create$ "(glowstonedust)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id backpack) ", " (find-text-for-id glowstone) " => " (find-text-for-id glowstonedust) "  " (* 100 ?v0 ?v1 ) "%")
+			craftglowstonedust
+			(create$ (str-cat "(glowstonedust " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftglowstonedust
+		)
+	)	
+)
 
 (defrule craft-furnace ""
 
-	(workbench)
-	(stone)
+	(workbench ?v0)
+	(stone ?v1)
 	(not (craftfurnace))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id stone) " => " (find-text-for-id furnace))
-		craftfurnace
-		(create$ "(furnace)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id stone) " => " (find-text-for-id furnace) "  " (* 100 ?v0 ?v1 ) "%")
+			craftfurnace
+			(create$ (str-cat "(furnace " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftfurnace
+		)
+	)	
+)
 
 (defrule craft-chest ""
 
-	(workbench)
-	(wood)
+	(workbench ?v0)
+	(wood ?v1)
 	(not (craftchest))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id wood) " => " (find-text-for-id chest))
-		craftchest
-		(create$ "(chest)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id wood) " => " (find-text-for-id chest) "  " (* 100 ?v0 ?v1 ) "%")
+			craftchest
+			(create$ (str-cat "(chest " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftchest
+		)
+	)	
+)
 
 (defrule craft-boiler ""
 
-	(workbench)
-	(iron)
+	(workbench ?v0)
+	(iron ?v1)
 	(not (craftboiler))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) " => " (find-text-for-id boiler))
-		craftboiler
-		(create$ "(boiler)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) " => " (find-text-for-id boiler) "  " (* 100 ?v0 ?v1 ) "%")
+			craftboiler
+			(create$ (str-cat "(boiler " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftboiler
+		)
+	)	
+)
 
 (defrule craft-meltingfurnace ""
 
-	(workbench)
-	(iron)
-	(stone)
-	(furnace)
+	(workbench ?v0)
+	(iron ?v1)
+	(stone ?v2)
+	(furnace ?v3)
 	(not (craftmeltingfurnace))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) ", " (find-text-for-id stone) ", " (find-text-for-id furnace) " => " (find-text-for-id meltingfurnace))
-		craftmeltingfurnace
-		(create$ "(meltingfurnace)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) ", " (find-text-for-id stone) ", " (find-text-for-id furnace) " => " (find-text-for-id meltingfurnace) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftmeltingfurnace
+			(create$ (str-cat "(meltingfurnace " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftmeltingfurnace
+		)
+	)	
+)
 
 (defrule craft-smokehouse ""
 
-	(workbench)
-	(furnace)
-	(wood)
+	(workbench ?v0)
+	(furnace ?v1)
+	(wood ?v2)
 	(not (craftsmokehouse))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id furnace) ", " (find-text-for-id wood) " => " (find-text-for-id smokehouse))
-		craftsmokehouse
-		(create$ "(smokehouse)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id furnace) ", " (find-text-for-id wood) " => " (find-text-for-id smokehouse) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftsmokehouse
+			(create$ (str-cat "(smokehouse " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftsmokehouse
+		)
+	)	
+)
 
 (defrule craft-stonecutter ""
 
-	(workbench)
-	(iron)
-	(stone)
+	(workbench ?v0)
+	(iron ?v1)
+	(stone ?v2)
 	(not (craftstonecutter))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) ", " (find-text-for-id stone) " => " (find-text-for-id stonecutter))
-		craftstonecutter
-		(create$ "(stonecutter)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) ", " (find-text-for-id stone) " => " (find-text-for-id stonecutter) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftstonecutter
+			(create$ (str-cat "(stonecutter " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftstonecutter
+		)
+	)	
+)
 
 (defrule craft-anvil ""
 
-	(workbench)
-	(iron)
-	(ironblock)
+	(workbench ?v0)
+	(iron ?v1)
+	(ironblock ?v2)
 	(not (craftanvil))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) ", " (find-text-for-id ironblock) " => " (find-text-for-id anvil))
-		craftanvil
-		(create$ "(anvil)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) ", " (find-text-for-id ironblock) " => " (find-text-for-id anvil) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftanvil
+			(create$ (str-cat "(anvil " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftanvil
+		)
+	)	
+)
 
 (defrule craft-hive ""
 
-	(workbench)
-	(wood)
-	(honeycomb)
+	(workbench ?v0)
+	(wood ?v1)
+	(honeycomb ?v2)
 	(not (crafthive))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id wood) ", " (find-text-for-id honeycomb) " => " (find-text-for-id hive))
-		crafthive
-		(create$ "(hive)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id wood) ", " (find-text-for-id honeycomb) " => " (find-text-for-id hive) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			crafthive
+			(create$ (str-cat "(hive " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			crafthive
+		)
+	)	
+)
 
 (defrule craft-blacksmithstable ""
 
-	(workbench)
-	(iron)
-	(wood)
+	(workbench ?v0)
+	(iron ?v1)
+	(wood ?v2)
 	(not (craftblacksmithstable))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) ", " (find-text-for-id wood) " => " (find-text-for-id blacksmithstable))
-		craftblacksmithstable
-		(create$ "(blacksmithstable)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) ", " (find-text-for-id wood) " => " (find-text-for-id blacksmithstable) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftblacksmithstable
+			(create$ (str-cat "(blacksmithstable " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftblacksmithstable
+		)
+	)	
+)
 
 (defrule craft-cartographerstable ""
 
-	(workbench)
-	(paper)
-	(board)
+	(workbench ?v0)
+	(paper ?v1)
+	(board ?v2)
 	(not (craftcartographerstable))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id paper) ", " (find-text-for-id board) " => " (find-text-for-id cartographerstable))
-		craftcartographerstable
-		(create$ "(cartographerstable)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id paper) ", " (find-text-for-id board) " => " (find-text-for-id cartographerstable) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftcartographerstable
+			(create$ (str-cat "(cartographerstable " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftcartographerstable
+		)
+	)	
+)
 
 (defrule craft-archerstable ""
 
-	(workbench)
-	(flint)
-	(board)
+	(workbench ?v0)
+	(flint ?v1)
+	(board ?v2)
 	(not (craftarcherstable))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id flint) ", " (find-text-for-id board) " => " (find-text-for-id archerstable))
-		craftarcherstable
-		(create$ "(archerstable)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id flint) ", " (find-text-for-id board) " => " (find-text-for-id archerstable) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftarcherstable
+			(create$ (str-cat "(archerstable " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftarcherstable
+		)
+	)	
+)
 
 (defrule craft-hopper ""
 
-	(workbench)
-	(iron)
-	(chest)
+	(workbench ?v0)
+	(iron ?v1)
+	(chest ?v2)
 	(not (crafthopper))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) ", " (find-text-for-id chest) " => " (find-text-for-id hopper))
-		crafthopper
-		(create$ "(hopper)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) ", " (find-text-for-id chest) " => " (find-text-for-id hopper) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			crafthopper
+			(create$ (str-cat "(hopper " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			crafthopper
+		)
+	)	
+)
 
 (defrule craft-torch_ ""
 
-	(workbench)
-	(stick)
-	(coal)
+	(workbench ?v0)
+	(stick ?v1)
+	(coal ?v2)
 	(not (crafttorch_))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id stick) ", " (find-text-for-id coal) " => " (find-text-for-id torch))
-		crafttorch_
-		(create$ "(torch)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id stick) ", " (find-text-for-id coal) " => " (find-text-for-id torch) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			crafttorch_
+			(create$ (str-cat "(torch " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			crafttorch_
+		)
+	)	
+)
 
 (defrule craft-leash ""
 
-	(workbench)
-	(thread)
-	(slime)
+	(workbench ?v0)
+	(thread ?v1)
+	(slime ?v2)
 	(not (craftleash))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id thread) ", " (find-text-for-id slime) " => " (find-text-for-id leash))
-		craftleash
-		(create$ "(leash)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id thread) ", " (find-text-for-id slime) " => " (find-text-for-id leash) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftleash
+			(create$ (str-cat "(leash " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftleash
+		)
+	)	
+)
 
 (defrule craft-helmet ""
 
-	(workbench)
-	(turtleshell)
+	(workbench ?v0)
+	(turtleshell ?v1)
 	(not (crafthelmet))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id turtleshell) " => " (find-text-for-id helmet))
-		crafthelmet
-		(create$ "(helmet)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id turtleshell) " => " (find-text-for-id helmet) "  " (* 100 ?v0 ?v1 ) "%")
+			crafthelmet
+			(create$ (str-cat "(helmet " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			crafthelmet
+		)
+	)	
+)
 
 (defrule craft-campfire ""
 
-	(workbench)
-	(stick)
-	(coal)
-	(wood)
+	(workbench ?v0)
+	(stick ?v1)
+	(coal ?v2)
+	(wood ?v3)
 	(not (craftcampfire))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id stick) ", " (find-text-for-id coal) ", " (find-text-for-id wood) " => " (find-text-for-id campfire))
-		craftcampfire
-		(create$ "(campfire)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id stick) ", " (find-text-for-id coal) ", " (find-text-for-id wood) " => " (find-text-for-id campfire) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftcampfire
+			(create$ (str-cat "(campfire " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftcampfire
+		)
+	)	
+)
 
 (defrule craft-ironblock ""
 
-	(workbench)
-	(iron)
+	(workbench ?v0)
+	(iron ?v1)
 	(not (craftironblock))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) " => " (find-text-for-id ironblock))
-		craftironblock
-		(create$ "(ironblock)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) " => " (find-text-for-id ironblock) "  " (* 100 ?v0 ?v1 ) "%")
+			craftironblock
+			(create$ (str-cat "(ironblock " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftironblock
+		)
+	)	
+)
 
 (defrule craft-goldenblock ""
 
-	(workbench)
-	(gold)
+	(workbench ?v0)
+	(gold ?v1)
 	(not (craftgoldenblock))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id gold) " => " (find-text-for-id goldenblock))
-		craftgoldenblock
-		(create$ "(goldenblock)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id gold) " => " (find-text-for-id goldenblock) "  " (* 100 ?v0 ?v1 ) "%")
+			craftgoldenblock
+			(create$ (str-cat "(goldenblock " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftgoldenblock
+		)
+	)	
+)
 
 (defrule craft-diamondblock ""
 
-	(workbench)
-	(diamond)
+	(workbench ?v0)
+	(diamond ?v1)
 	(not (craftdiamondblock))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id diamond) " => " (find-text-for-id diamondblock))
-		craftdiamondblock
-		(create$ "(diamondblock)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id diamond) " => " (find-text-for-id diamondblock) "  " (* 100 ?v0 ?v1 ) "%")
+			craftdiamondblock
+			(create$ (str-cat "(diamondblock " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftdiamondblock
+		)
+	)	
+)
 
 (defrule craft-snowblock_ ""
 
-	(workbench)
-	(snowball)
+	(workbench ?v0)
+	(snowball ?v1)
 	(not (craftsnowblock_))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id snowball) " => " (find-text-for-id snowblock))
-		craftsnowblock_
-		(create$ "(snowblock)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id snowball) " => " (find-text-for-id snowblock) "  " (* 100 ?v0 ?v1 ) "%")
+			craftsnowblock_
+			(create$ (str-cat "(snowblock " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftsnowblock_
+		)
+	)	
+)
 
 (defrule craft-clayblock_ ""
 
-	(workbench)
-	(clay)
+	(workbench ?v0)
+	(clay ?v1)
 	(not (craftclayblock_))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id clay) " => " (find-text-for-id clayblock))
-		craftclayblock_
-		(create$ "(clayblock)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id clay) " => " (find-text-for-id clayblock) "  " (* 100 ?v0 ?v1 ) "%")
+			craftclayblock_
+			(create$ (str-cat "(clayblock " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftclayblock_
+		)
+	)	
+)
 
 (defrule craft-boneblock ""
 
-	(workbench)
-	(bonemeal)
+	(workbench ?v0)
+	(bonemeal ?v1)
 	(not (craftboneblock))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id bonemeal) " => " (find-text-for-id boneblock))
-		craftboneblock
-		(create$ "(boneblock)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id bonemeal) " => " (find-text-for-id boneblock) "  " (* 100 ?v0 ?v1 ) "%")
+			craftboneblock
+			(create$ (str-cat "(boneblock " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftboneblock
+		)
+	)	
+)
 
 (defrule craft-iron ""
 
-	(workbench)
-	(ironblock)
+	(workbench ?v0)
+	(ironblock ?v1)
 	(not (craftiron))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id ironblock) " => " (find-text-for-id iron))
-		craftiron
-		(create$ "(iron)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id ironblock) " => " (find-text-for-id iron) "  " (* 100 ?v0 ?v1 ) "%")
+			craftiron
+			(create$ (str-cat "(iron " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftiron
+		)
+	)	
+)
 
 (defrule craft-gold ""
 
-	(workbench)
-	(goldenblock)
+	(workbench ?v0)
+	(goldenblock ?v1)
 	(not (craftgold))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id goldenblock) " => " (find-text-for-id gold))
-		craftgold
-		(create$ "(gold)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id goldenblock) " => " (find-text-for-id gold) "  " (* 100 ?v0 ?v1 ) "%")
+			craftgold
+			(create$ (str-cat "(gold " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftgold
+		)
+	)	
+)
 
 (defrule craft-diamond ""
 
-	(workbench)
-	(diamondblock)
+	(workbench ?v0)
+	(diamondblock ?v1)
 	(not (craftdiamond))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id diamondblock) " => " (find-text-for-id diamond))
-		craftdiamond
-		(create$ "(diamond)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id diamondblock) " => " (find-text-for-id diamond) "  " (* 100 ?v0 ?v1 ) "%")
+			craftdiamond
+			(create$ (str-cat "(diamond " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftdiamond
+		)
+	)	
+)
 
 (defrule craft-pumpkinpart ""
 
-	(workbench)
-	(pumpkin)
+	(workbench ?v0)
+	(pumpkin ?v1)
 	(not (craftpumpkinpart))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id pumpkin) " => " (find-text-for-id pumpkinpart))
-		craftpumpkinpart
-		(create$ "(pumpkinpart)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id pumpkin) " => " (find-text-for-id pumpkinpart) "  " (* 100 ?v0 ?v1 ) "%")
+			craftpumpkinpart
+			(create$ (str-cat "(pumpkinpart " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftpumpkinpart
+		)
+	)	
+)
 
 (defrule craft-pumpkinseed ""
 
-	(workbench)
-	(pumpkinpart)
+	(workbench ?v0)
+	(pumpkinpart ?v1)
 	(not (craftpumpkinseed))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id pumpkinpart) " => " (find-text-for-id pumpkinseed))
-		craftpumpkinseed
-		(create$ "(pumpkinseed)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id pumpkinpart) " => " (find-text-for-id pumpkinseed) "  " (* 100 ?v0 ?v1 ) "%")
+			craftpumpkinseed
+			(create$ (str-cat "(pumpkinseed " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftpumpkinseed
+		)
+	)	
+)
 
 (defrule craft-snowlayer ""
 
-	(workbench)
-	(snowblock)
+	(workbench ?v0)
+	(snowblock ?v1)
 	(not (craftsnowlayer))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id snowblock) " => " (find-text-for-id snowlayer))
-		craftsnowlayer
-		(create$ "(snowlayer)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id snowblock) " => " (find-text-for-id snowlayer) "  " (* 100 ?v0 ?v1 ) "%")
+			craftsnowlayer
+			(create$ (str-cat "(snowlayer " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftsnowlayer
+		)
+	)	
+)
 
 (defrule craft-cloth ""
 
-	(workbench)
-	(thread)
+	(workbench ?v0)
+	(thread ?v1)
 	(not (craftcloth))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id thread) " => " (find-text-for-id cloth))
-		craftcloth
-		(create$ "(cloth)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id thread) " => " (find-text-for-id cloth) "  " (* 100 ?v0 ?v1 ) "%")
+			craftcloth
+			(create$ (str-cat "(cloth " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftcloth
+		)
+	)	
+)
 
 (defrule craft-bed ""
 
-	(workbench)
-	(cloth)
-	(board)
+	(workbench ?v0)
+	(cloth ?v1)
+	(board ?v2)
 	(not (craftbed))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id cloth) ", " (find-text-for-id board) " => " (find-text-for-id bed))
-		craftbed
-		(create$ "(bed)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id cloth) ", " (find-text-for-id board) " => " (find-text-for-id bed) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftbed
+			(create$ (str-cat "(bed " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftbed
+		)
+	)	
+)
 
 (defrule craft-picture ""
 
-	(workbench)
-	(cloth)
-	(stick)
+	(workbench ?v0)
+	(cloth ?v1)
+	(stick ?v2)
 	(not (craftpicture))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id cloth) ", " (find-text-for-id stick) " => " (find-text-for-id picture))
-		craftpicture
-		(create$ "(picture)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id cloth) ", " (find-text-for-id stick) " => " (find-text-for-id picture) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftpicture
+			(create$ (str-cat "(picture " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftpicture
+		)
+	)	
+)
 
 (defrule craft-lighter_ ""
 
-	(workbench)
-	(flint)
-	(iron)
+	(workbench ?v0)
+	(flint ?v1)
+	(iron ?v2)
 	(not (craftlighter_))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id flint) ", " (find-text-for-id iron) " => " (find-text-for-id lighter))
-		craftlighter_
-		(create$ "(lighter)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id flint) ", " (find-text-for-id iron) " => " (find-text-for-id lighter) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftlighter_
+			(create$ (str-cat "(lighter " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftlighter_
+		)
+	)	
+)
 
 (defrule craft-watch ""
 
-	(workbench)
-	(gold)
-	(redstone)
+	(workbench ?v0)
+	(gold ?v1)
+	(redstone ?v2)
 	(not (craftwatch))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id gold) ", " (find-text-for-id redstone) " => " (find-text-for-id watch))
-		craftwatch
-		(create$ "(watch)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id gold) ", " (find-text-for-id redstone) " => " (find-text-for-id watch) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftwatch
+			(create$ (str-cat "(watch " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftwatch
+		)
+	)	
+)
 
 (defrule craft-compass ""
 
-	(workbench)
-	(iron)
-	(redstone)
+	(workbench ?v0)
+	(iron ?v1)
+	(redstone ?v2)
 	(not (craftcompass))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) ", " (find-text-for-id redstone) " => " (find-text-for-id compass))
-		craftcompass
-		(create$ "(compass)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) ", " (find-text-for-id redstone) " => " (find-text-for-id compass) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftcompass
+			(create$ (str-cat "(compass " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftcompass
+		)
+	)	
+)
 
 (defrule craft-map ""
 
-	(workbench)
-	(paper)
-	(compass)
+	(workbench ?v0)
+	(paper ?v1)
+	(compass ?v2)
 	(not (craftmap))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id paper) ", " (find-text-for-id compass) " => " (find-text-for-id map))
-		craftmap
-		(create$ "(map)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id paper) ", " (find-text-for-id compass) " => " (find-text-for-id map) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftmap
+			(create$ (str-cat "(map " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftmap
+		)
+	)	
+)
 
 (defrule craft-fishingrod ""
 
-	(workbench)
-	(stick)
-	(thread)
+	(workbench ?v0)
+	(stick ?v1)
+	(thread ?v2)
 	(not (craftfishingrod))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id stick) ", " (find-text-for-id thread) " => " (find-text-for-id fishingrod))
-		craftfishingrod
-		(create$ "(fishingrod)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id stick) ", " (find-text-for-id thread) " => " (find-text-for-id fishingrod) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftfishingrod
+			(create$ (str-cat "(fishingrod " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftfishingrod
+		)
+	)	
+)
 
 (defrule craft-woodenpickaxe ""
 
-	(workbench)
-	(wood)
-	(stick)
+	(workbench ?v0)
+	(wood ?v1)
+	(stick ?v2)
 	(not (craftwoodenpickaxe))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id wood) ", " (find-text-for-id stick) " => " (find-text-for-id woodenpickaxe))
-		craftwoodenpickaxe
-		(create$ "(woodenpickaxe)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id wood) ", " (find-text-for-id stick) " => " (find-text-for-id woodenpickaxe) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftwoodenpickaxe
+			(create$ (str-cat "(woodenpickaxe " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftwoodenpickaxe
+		)
+	)	
+)
 
 (defrule craft-stonepickaxe ""
 
-	(workbench)
-	(stone)
-	(stick)
+	(workbench ?v0)
+	(stone ?v1)
+	(stick ?v2)
 	(not (craftstonepickaxe))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id stone) ", " (find-text-for-id stick) " => " (find-text-for-id stonepickaxe))
-		craftstonepickaxe
-		(create$ "(stonepickaxe)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id stone) ", " (find-text-for-id stick) " => " (find-text-for-id stonepickaxe) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftstonepickaxe
+			(create$ (str-cat "(stonepickaxe " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftstonepickaxe
+		)
+	)	
+)
 
 (defrule craft-ironpickaxe ""
 
-	(workbench)
-	(iron)
-	(stick)
+	(workbench ?v0)
+	(iron ?v1)
+	(stick ?v2)
 	(not (craftironpickaxe))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) ", " (find-text-for-id stick) " => " (find-text-for-id ironpickaxe))
-		craftironpickaxe
-		(create$ "(ironpickaxe)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id iron) ", " (find-text-for-id stick) " => " (find-text-for-id ironpickaxe) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftironpickaxe
+			(create$ (str-cat "(ironpickaxe " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftironpickaxe
+		)
+	)	
+)
 
 (defrule craft-goldenpickaxe ""
 
-	(workbench)
-	(gold)
-	(stick)
+	(workbench ?v0)
+	(gold ?v1)
+	(stick ?v2)
 	(not (craftgoldenpickaxe))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id gold) ", " (find-text-for-id stick) " => " (find-text-for-id goldenpickaxe))
-		craftgoldenpickaxe
-		(create$ "(goldenpickaxe)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id gold) ", " (find-text-for-id stick) " => " (find-text-for-id goldenpickaxe) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftgoldenpickaxe
+			(create$ (str-cat "(goldenpickaxe " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftgoldenpickaxe
+		)
+	)	
+)
 
 (defrule craft-diamondpickaxe ""
 
-	(workbench)
-	(diamond)
-	(stick)
+	(workbench ?v0)
+	(diamond ?v1)
+	(stick ?v2)
 	(not (craftdiamondpickaxe))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id diamond) ", " (find-text-for-id stick) " => " (find-text-for-id diamondpickaxe))
-		craftdiamondpickaxe
-		(create$ "(diamondpickaxe)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id diamond) ", " (find-text-for-id stick) " => " (find-text-for-id diamondpickaxe) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftdiamondpickaxe
+			(create$ (str-cat "(diamondpickaxe " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftdiamondpickaxe
+		)
+	)	
+)
 
 (defrule craft-netherite ""
 
-	(workbench)
-	(netheritescrap)
-	(gold)
+	(workbench ?v0)
+	(netheritescrap ?v1)
+	(gold ?v2)
 	(not (craftnetherite))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id netheritescrap) ", " (find-text-for-id gold) " => " (find-text-for-id netherite))
-		craftnetherite
-		(create$ "(netherite)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id netheritescrap) ", " (find-text-for-id gold) " => " (find-text-for-id netherite) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftnetherite
+			(create$ (str-cat "(netherite " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftnetherite
+		)
+	)	
+)
 
 (defrule craft-arrow ""
 
-	(workbench)
-	(flint)
-	(stick)
-	(feather)
+	(workbench ?v0)
+	(flint ?v1)
+	(stick ?v2)
+	(feather ?v3)
 	(not (craftarrow))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id flint) ", " (find-text-for-id stick) ", " (find-text-for-id feather) " => " (find-text-for-id arrow))
-		craftarrow
-		(create$ "(arrow)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id flint) ", " (find-text-for-id stick) ", " (find-text-for-id feather) " => " (find-text-for-id arrow) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftarrow
+			(create$ (str-cat "(arrow " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftarrow
+		)
+	)	
+)
 
 (defrule craft-ghostarrow ""
 
-	(workbench)
-	(glowstonedust)
-	(arrow)
+	(workbench ?v0)
+	(glowstonedust ?v1)
+	(arrow ?v2)
 	(not (craftghostarrow))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id glowstonedust) ", " (find-text-for-id arrow) " => " (find-text-for-id ghostarrow))
-		craftghostarrow
-		(create$ "(ghostarrow)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id glowstonedust) ", " (find-text-for-id arrow) " => " (find-text-for-id ghostarrow) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftghostarrow
+			(create$ (str-cat "(ghostarrow " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftghostarrow
+		)
+	)	
+)
 
 (defrule craft-tnt ""
 
-	(workbench)
-	(gunpowder)
-	(sand)
+	(workbench ?v0)
+	(gunpowder ?v1)
+	(sand ?v2)
 	(not (crafttnt))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id gunpowder) ", " (find-text-for-id sand) " => " (find-text-for-id tnt))
-		crafttnt
-		(create$ "(tnt)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id gunpowder) ", " (find-text-for-id sand) " => " (find-text-for-id tnt) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			crafttnt
+			(create$ (str-cat "(tnt " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			crafttnt
+		)
+	)	
+)
 
 (defrule craft-jackslamp_ ""
 
-	(workbench)
-	(pumpkin)
-	(torch)
+	(workbench ?v0)
+	(pumpkin ?v1)
+	(torch ?v2)
 	(not (craftjackslamp_))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id pumpkin) ", " (find-text-for-id torch) " => " (find-text-for-id jackslamp))
-		craftjackslamp_
-		(create$ "(jackslamp)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id pumpkin) ", " (find-text-for-id torch) " => " (find-text-for-id jackslamp) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftjackslamp_
+			(create$ (str-cat "(jackslamp " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftjackslamp_
+		)
+	)	
+)
 
 (defrule craft-slimeblock ""
 
-	(workbench)
-	(slime)
+	(workbench ?v0)
+	(slime ?v1)
 	(not (craftslimeblock))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id slime) " => " (find-text-for-id slimeblock))
-		craftslimeblock
-		(create$ "(slimeblock)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id slime) " => " (find-text-for-id slimeblock) "  " (* 100 ?v0 ?v1 ) "%")
+			craftslimeblock
+			(create$ (str-cat "(slimeblock " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftslimeblock
+		)
+	)	
+)
 
 (defrule craft-mossystone_ ""
 
-	(workbench)
-	(stone)
-	(vines)
+	(workbench ?v0)
+	(stone ?v1)
+	(vines ?v2)
 	(not (craftmossystone_))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id stone) ", " (find-text-for-id vines) " => " (find-text-for-id mossystone))
-		craftmossystone_
-		(create$ "(mossystone)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id stone) ", " (find-text-for-id vines) " => " (find-text-for-id mossystone) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftmossystone_
+			(create$ (str-cat "(mossystone " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftmossystone_
+		)
+	)	
+)
 
 (defrule craft-redstonetorch_ ""
 
-	(workbench)
-	(stick)
-	(redstone)
+	(workbench ?v0)
+	(stick ?v1)
+	(redstone ?v2)
 	(not (craftredstonetorch_))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id stick) ", " (find-text-for-id redstone) " => " (find-text-for-id redstonetorch))
-		craftredstonetorch_
-		(create$ "(redstonetorch)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id stick) ", " (find-text-for-id redstone) " => " (find-text-for-id redstonetorch) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftredstonetorch_
+			(create$ (str-cat "(redstonetorch " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftredstonetorch_
+		)
+	)	
+)
 
 (defrule craft-repeater ""
 
-	(workbench)
-	(redstone)
-	(redstonetorch)
-	(stone)
+	(workbench ?v0)
+	(redstone ?v1)
+	(redstonetorch ?v2)
+	(stone ?v3)
 	(not (craftrepeater))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id redstone) ", " (find-text-for-id redstonetorch) ", " (find-text-for-id stone) " => " (find-text-for-id repeater))
-		craftrepeater
-		(create$ "(repeater)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id redstone) ", " (find-text-for-id redstonetorch) ", " (find-text-for-id stone) " => " (find-text-for-id repeater) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftrepeater
+			(create$ (str-cat "(repeater " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftrepeater
+		)
+	)	
+)
 
 (defrule craft-cookies ""
 
-	(workbench)
-	(beans)
-	(wheat)
+	(workbench ?v0)
+	(beans ?v1)
+	(wheat ?v2)
 	(not (craftcookies))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id beans) ", " (find-text-for-id wheat) " => " (find-text-for-id cookies))
-		craftcookies
-		(create$ "(cookies)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id beans) ", " (find-text-for-id wheat) " => " (find-text-for-id cookies) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftcookies
+			(create$ (str-cat "(cookies " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftcookies
+		)
+	)	
+)
 
 (defrule craft-bread ""
 
-	(workbench)
-	(wheat)
+	(workbench ?v0)
+	(wheat ?v1)
 	(not (craftbread))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id wheat) " => " (find-text-for-id bread))
-		craftbread
-		(create$ "(bread)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id wheat) " => " (find-text-for-id bread) "  " (* 100 ?v0 ?v1 ) "%")
+			craftbread
+			(create$ (str-cat "(bread " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftbread
+		)
+	)	
+)
 
 (defrule craft-sugar_ ""
 
-	(workbench)
-	(cane)
+	(workbench ?v0)
+	(cane ?v1)
 	(not (craftsugar_))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id cane) " => " (find-text-for-id sugar))
-		craftsugar_
-		(create$ "(sugar)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id cane) " => " (find-text-for-id sugar) "  " (* 100 ?v0 ?v1 ) "%")
+			craftsugar_
+			(create$ (str-cat "(sugar " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftsugar_
+		)
+	)	
+)
 
 (defrule craft-cake ""
 
-	(workbench)
-	(milk)
-	(wheat)
-	(egg)
-	(sugar)
+	(workbench ?v0)
+	(milk ?v1)
+	(wheat ?v2)
+	(egg ?v3)
+	(sugar ?v4)
 	(not (craftcake))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id milk) ", " (find-text-for-id wheat) ", " (find-text-for-id egg) ", " (find-text-for-id sugar) " => " (find-text-for-id cake))
-		craftcake
-		(create$ "(cake)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ?v4 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id milk) ", " (find-text-for-id wheat) ", " (find-text-for-id egg) ", " (find-text-for-id sugar) " => " (find-text-for-id cake) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ?v4 ) "%")
+			craftcake
+			(create$ (str-cat "(cake " (* 1 ?v0 ?v1 ?v2 ?v3 ?v4 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftcake
+		)
+	)	
+)
 
 (defrule craft-goldenapple ""
 
-	(workbench)
-	(goldenblock)
-	(apple)
+	(workbench ?v0)
+	(goldenblock ?v1)
+	(apple ?v2)
 	(not (craftgoldenapple))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id goldenblock) ", " (find-text-for-id apple) " => " (find-text-for-id goldenapple))
-		craftgoldenapple
-		(create$ "(goldenapple)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id goldenblock) ", " (find-text-for-id apple) " => " (find-text-for-id goldenapple) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftgoldenapple
+			(create$ (str-cat "(goldenapple " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftgoldenapple
+		)
+	)	
+)
 
 (defrule craft-pumpkinpie ""
 
-	(workbench)
-	(pumpkin)
-	(egg)
-	(sugar)
+	(workbench ?v0)
+	(pumpkin ?v1)
+	(egg ?v2)
+	(sugar ?v3)
 	(not (craftpumpkinpie))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id pumpkin) ", " (find-text-for-id egg) ", " (find-text-for-id sugar) " => " (find-text-for-id pumpkinpie))
-		craftpumpkinpie
-		(create$ "(pumpkinpie)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id pumpkin) ", " (find-text-for-id egg) ", " (find-text-for-id sugar) " => " (find-text-for-id pumpkinpie) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftpumpkinpie
+			(create$ (str-cat "(pumpkinpie " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftpumpkinpie
+		)
+	)	
+)
 
 (defrule craft-sheafofhay ""
 
-	(workbench)
-	(wheat)
+	(workbench ?v0)
+	(wheat ?v1)
 	(not (craftsheafofhay))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id wheat) " => " (find-text-for-id sheafofhay))
-		craftsheafofhay
-		(create$ "(sheafofhay)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id wheat) " => " (find-text-for-id sheafofhay) "  " (* 100 ?v0 ?v1 ) "%")
+			craftsheafofhay
+			(create$ (str-cat "(sheafofhay " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftsheafofhay
+		)
+	)	
+)
 
 (defrule craft-wheat_ ""
 
-	(workbench)
-	(sheafofhay)
+	(workbench ?v0)
+	(sheafofhay ?v1)
 	(not (craftwheat_))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id sheafofhay) " => " (find-text-for-id wheat))
-		craftwheat_
-		(create$ "(wheat)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id sheafofhay) " => " (find-text-for-id wheat) "  " (* 100 ?v0 ?v1 ) "%")
+			craftwheat_
+			(create$ (str-cat "(wheat " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftwheat_
+		)
+	)	
+)
 
 (defrule craft-paper ""
 
-	(workbench)
-	(bamboo)
+	(workbench ?v0)
+	(bamboo ?v1)
 	(not (craftpaper))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id bamboo) " => " (find-text-for-id paper))
-		craftpaper
-		(create$ "(paper)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id bamboo) " => " (find-text-for-id paper) "  " (* 100 ?v0 ?v1 ) "%")
+			craftpaper
+			(create$ (str-cat "(paper " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftpaper
+		)
+	)	
+)
 
 (defrule craft-stage ""
 
-	(workbench)
-	(bamboo)
-	(thread)
+	(workbench ?v0)
+	(bamboo ?v1)
+	(thread ?v2)
 	(not (craftstage))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id bamboo) ", " (find-text-for-id thread) " => " (find-text-for-id stage))
-		craftstage
-		(create$ "(stage)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id bamboo) ", " (find-text-for-id thread) " => " (find-text-for-id stage) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftstage
+			(create$ (str-cat "(stage " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftstage
+		)
+	)	
+)
 
 (defrule craft-book ""
 
-	(workbench)
-	(paper)
+	(workbench ?v0)
+	(paper ?v1)
 	(not (craftbook))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id paper) " => " (find-text-for-id book))
-		craftbook
-		(create$ "(book)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id paper) " => " (find-text-for-id book) "  " (* 100 ?v0 ?v1 ) "%")
+			craftbook
+			(create$ (str-cat "(book " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftbook
+		)
+	)	
+)
 
 (defrule craft-firepowder_ ""
 
-	(workbench)
-	(firerod)
+	(workbench ?v0)
+	(firerod ?v1)
 	(not (craftfirepowder_))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id firerod) " => " (find-text-for-id firepowder))
-		craftfirepowder_
-		(create$ "(firepowder)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id firerod) " => " (find-text-for-id firepowder) "  " (* 100 ?v0 ?v1 ) "%")
+			craftfirepowder_
+			(create$ (str-cat "(firepowder " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftfirepowder_
+		)
+	)	
+)
 
 (defrule craft-endermaneye_ ""
 
-	(workbench)
-	(endermanpearl)
-	(firepowder)
+	(workbench ?v0)
+	(endermanpearl ?v1)
+	(firepowder ?v2)
 	(not (craftendermaneye_))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id endermanpearl) ", " (find-text-for-id firepowder) " => " (find-text-for-id endermaneye))
-		craftendermaneye_
-		(create$ "(endermaneye)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id endermanpearl) ", " (find-text-for-id firepowder) " => " (find-text-for-id endermaneye) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftendermaneye_
+			(create$ (str-cat "(endermaneye " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftendermaneye_
+		)
+	)	
+)
 
 (defrule craft-lavacream_ ""
 
-	(workbench)
-	(slime)
-	(firepowder)
+	(workbench ?v0)
+	(slime ?v1)
+	(firepowder ?v2)
 	(not (craftlavacream_))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id slime) ", " (find-text-for-id firepowder) " => " (find-text-for-id lavacream))
-		craftlavacream_
-		(create$ "(lavacream)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id slime) ", " (find-text-for-id firepowder) " => " (find-text-for-id lavacream) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftlavacream_
+			(create$ (str-cat "(lavacream " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftlavacream_
+		)
+	)	
+)
 
 (defrule craft-fireball ""
 
-	(workbench)
-	(firepowder)
-	(gunpowder)
-	(coal)
+	(workbench ?v0)
+	(firepowder ?v1)
+	(gunpowder ?v2)
+	(coal ?v3)
 	(not (craftfireball))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id firepowder) ", " (find-text-for-id gunpowder) ", " (find-text-for-id coal) " => " (find-text-for-id fireball))
-		craftfireball
-		(create$ "(fireball)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id firepowder) ", " (find-text-for-id gunpowder) ", " (find-text-for-id coal) " => " (find-text-for-id fireball) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftfireball
+			(create$ (str-cat "(fireball " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftfireball
+		)
+	)	
+)
 
 (defrule craft-editablebook ""
 
-	(workbench)
-	(feather)
-	(dye)
-	(book)
+	(workbench ?v0)
+	(feather ?v1)
+	(dye ?v2)
+	(book ?v3)
 	(not (crafteditablebook))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id feather) ", " (find-text-for-id dye) ", " (find-text-for-id book) " => " (find-text-for-id editablebook))
-		crafteditablebook
-		(create$ "(editablebook)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id feather) ", " (find-text-for-id dye) ", " (find-text-for-id book) " => " (find-text-for-id editablebook) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			crafteditablebook
+			(create$ (str-cat "(editablebook " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			crafteditablebook
+		)
+	)	
+)
 
 (defrule craft-star_ ""
 
-	(workbench)
-	(gunpowder)
-	(dye)
+	(workbench ?v0)
+	(gunpowder ?v1)
+	(dye ?v2)
 	(not (craftstar_))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id gunpowder) ", " (find-text-for-id dye) " => " (find-text-for-id star))
-		craftstar_
-		(create$ "(star)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id gunpowder) ", " (find-text-for-id dye) " => " (find-text-for-id star) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftstar_
+			(create$ (str-cat "(star " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftstar_
+		)
+	)	
+)
 
 (defrule craft-rocket ""
 
-	(workbench)
-	(star)
-	(paper)
-	(gunpowder)
+	(workbench ?v0)
+	(star ?v1)
+	(paper ?v2)
+	(gunpowder ?v3)
 	(not (craftrocket))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id star) ", " (find-text-for-id paper) ", " (find-text-for-id gunpowder) " => " (find-text-for-id rocket))
-		craftrocket
-		(create$ "(rocket)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id star) ", " (find-text-for-id paper) ", " (find-text-for-id gunpowder) " => " (find-text-for-id rocket) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftrocket
+			(create$ (str-cat "(rocket " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftrocket
+		)
+	)	
+)
 
 (defrule craft-greydye ""
 
-	(workbench)
-	(ink)
-	(bonemeal)
+	(workbench ?v0)
+	(ink ?v1)
+	(bonemeal ?v2)
 	(not (craftgreydye))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id ink) ", " (find-text-for-id bonemeal) " => " (find-text-for-id greydye))
-		craftgreydye
-		(create$ "(greydye)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id ink) ", " (find-text-for-id bonemeal) " => " (find-text-for-id greydye) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftgreydye
+			(create$ (str-cat "(greydye " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftgreydye
+		)
+	)	
+)
 
 (defrule craft-magmablock_ ""
 
-	(workbench)
-	(lavacream)
+	(workbench ?v0)
+	(lavacream ?v1)
 	(not (craftmagmablock_))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id lavacream) " => " (find-text-for-id magmablock))
-		craftmagmablock_
-		(create$ "(magmablock)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id lavacream) " => " (find-text-for-id magmablock) "  " (* 100 ?v0 ?v1 ) "%")
+			craftmagmablock_
+			(create$ (str-cat "(magmablock " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftmagmablock_
+		)
+	)	
+)
 
 (defrule craft-glowstone ""
 
-	(workbench)
-	(glowstonedust)
+	(workbench ?v0)
+	(glowstonedust ?v1)
 	(not (craftglowstone))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id glowstonedust) " => " (find-text-for-id glowstone))
-		craftglowstone
-		(create$ "(glowstone)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id glowstonedust) " => " (find-text-for-id glowstone) "  " (* 100 ?v0 ?v1 ) "%")
+			craftglowstone
+			(create$ (str-cat "(glowstone " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftglowstone
+		)
+	)	
+)
 
 (defrule craft-glowstonedust_ ""
 
-	(workbench)
-	(glowstone)
+	(workbench ?v0)
+	(glowstone ?v1)
 	(not (craftglowstonedust_))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id glowstone) " => " (find-text-for-id glowstonedust))
-		craftglowstonedust_
-		(create$ "(glowstonedust)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id glowstone) " => " (find-text-for-id glowstonedust) "  " (* 100 ?v0 ?v1 ) "%")
+			craftglowstonedust_
+			(create$ (str-cat "(glowstonedust " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftglowstonedust_
+		)
+	)	
+)
 
 (defrule craft-library ""
 
-	(workbench)
-	(board)
-	(book)
+	(workbench ?v0)
+	(board ?v1)
+	(book ?v2)
 	(not (craftlibrary))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id board) ", " (find-text-for-id book) " => " (find-text-for-id library))
-		craftlibrary
-		(create$ "(library)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id board) ", " (find-text-for-id book) " => " (find-text-for-id library) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftlibrary
+			(create$ (str-cat "(library " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftlibrary
+		)
+	)	
+)
 
 (defrule craft-cathedral ""
 
-	(workbench)
-	(board)
-	(library)
+	(workbench ?v0)
+	(board ?v1)
+	(library ?v2)
 	(not (craftcathedral))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id board) ", " (find-text-for-id library) " => " (find-text-for-id cathedral))
-		craftcathedral
-		(create$ "(cathedral)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id board) ", " (find-text-for-id library) " => " (find-text-for-id cathedral) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftcathedral
+			(create$ (str-cat "(cathedral " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftcathedral
+		)
+	)	
+)
 
 (defrule craft-musicbox ""
 
-	(workbench)
-	(board)
-	(diamond)
+	(workbench ?v0)
+	(board ?v1)
+	(diamond ?v2)
 	(not (craftmusicbox))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id workbench) ", " (find-text-for-id board) ", " (find-text-for-id diamond) " => " (find-text-for-id musicbox))
-		craftmusicbox
-		(create$ "(musicbox)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id workbench) ", " (find-text-for-id board) ", " (find-text-for-id diamond) " => " (find-text-for-id musicbox) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftmusicbox
+			(create$ (str-cat "(musicbox " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftmusicbox
+		)
+	)	
+)
 
 (defrule craft-glass ""
 
-	(furnace)
-	(sand)
-	(fire)
-	(coal)
+	(furnace ?v0)
+	(sand ?v1)
+	(fire ?v2)
+	(coal ?v3)
 	(not (craftglass))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id furnace) ", " (find-text-for-id sand) ", " (find-text-for-id fire) ", " (find-text-for-id coal) " => " (find-text-for-id glass))
-		craftglass
-		(create$ "(glass)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id furnace) ", " (find-text-for-id sand) ", " (find-text-for-id fire) ", " (find-text-for-id coal) " => " (find-text-for-id glass) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftglass
+			(create$ (str-cat "(glass " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftglass
+		)
+	)	
+)
 
 (defrule craft-glass_ ""
 
-	(furnace)
-	(sand)
-	(fire)
-	(wood)
+	(furnace ?v0)
+	(sand ?v1)
+	(fire ?v2)
+	(wood ?v3)
 	(not (craftglass_))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id furnace) ", " (find-text-for-id sand) ", " (find-text-for-id fire) ", " (find-text-for-id wood) " => " (find-text-for-id glass))
-		craftglass_
-		(create$ "(glass)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id furnace) ", " (find-text-for-id sand) ", " (find-text-for-id fire) ", " (find-text-for-id wood) " => " (find-text-for-id glass) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftglass_
+			(create$ (str-cat "(glass " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftglass_
+		)
+	)	
+)
 
 (defrule craft-glass__ ""
 
-	(furnace)
-	(sand)
-	(fire)
-	(board)
+	(furnace ?v0)
+	(sand ?v1)
+	(fire ?v2)
+	(board ?v3)
 	(not (craftglass__))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id furnace) ", " (find-text-for-id sand) ", " (find-text-for-id fire) ", " (find-text-for-id board) " => " (find-text-for-id glass))
-		craftglass__
-		(create$ "(glass)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id furnace) ", " (find-text-for-id sand) ", " (find-text-for-id fire) ", " (find-text-for-id board) " => " (find-text-for-id glass) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftglass__
+			(create$ (str-cat "(glass " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftglass__
+		)
+	)	
+)
 
 (defrule craft-iron_ ""
 
-	(furnace)
-	(ironore)
-	(fire)
-	(coal)
+	(furnace ?v0)
+	(ironore ?v1)
+	(fire ?v2)
+	(coal ?v3)
 	(not (craftiron_))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id furnace) ", " (find-text-for-id ironore) ", " (find-text-for-id fire) ", " (find-text-for-id coal) " => " (find-text-for-id iron))
-		craftiron_
-		(create$ "(iron)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id furnace) ", " (find-text-for-id ironore) ", " (find-text-for-id fire) ", " (find-text-for-id coal) " => " (find-text-for-id iron) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftiron_
+			(create$ (str-cat "(iron " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftiron_
+		)
+	)	
+)
 
 (defrule craft-iron__ ""
 
-	(furnace)
-	(ironore)
-	(fire)
-	(wood)
+	(furnace ?v0)
+	(ironore ?v1)
+	(fire ?v2)
+	(wood ?v3)
 	(not (craftiron__))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id furnace) ", " (find-text-for-id ironore) ", " (find-text-for-id fire) ", " (find-text-for-id wood) " => " (find-text-for-id iron))
-		craftiron__
-		(create$ "(iron)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id furnace) ", " (find-text-for-id ironore) ", " (find-text-for-id fire) ", " (find-text-for-id wood) " => " (find-text-for-id iron) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftiron__
+			(create$ (str-cat "(iron " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftiron__
+		)
+	)	
+)
 
 (defrule craft-iron___ ""
 
-	(furnace)
-	(ironore)
-	(fire)
-	(board)
+	(furnace ?v0)
+	(ironore ?v1)
+	(fire ?v2)
+	(board ?v3)
 	(not (craftiron___))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id furnace) ", " (find-text-for-id ironore) ", " (find-text-for-id fire) ", " (find-text-for-id board) " => " (find-text-for-id iron))
-		craftiron___
-		(create$ "(iron)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id furnace) ", " (find-text-for-id ironore) ", " (find-text-for-id fire) ", " (find-text-for-id board) " => " (find-text-for-id iron) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftiron___
+			(create$ (str-cat "(iron " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftiron___
+		)
+	)	
+)
 
 (defrule craft-gold_ ""
 
-	(furnace)
-	(goldenore)
-	(fire)
-	(coal)
+	(furnace ?v0)
+	(goldenore ?v1)
+	(fire ?v2)
+	(coal ?v3)
 	(not (craftgold_))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id furnace) ", " (find-text-for-id goldenore) ", " (find-text-for-id fire) ", " (find-text-for-id coal) " => " (find-text-for-id gold))
-		craftgold_
-		(create$ "(gold)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id furnace) ", " (find-text-for-id goldenore) ", " (find-text-for-id fire) ", " (find-text-for-id coal) " => " (find-text-for-id gold) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftgold_
+			(create$ (str-cat "(gold " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftgold_
+		)
+	)	
+)
 
 (defrule craft-gold__ ""
 
-	(furnace)
-	(goldenore)
-	(fire)
-	(wood)
+	(furnace ?v0)
+	(goldenore ?v1)
+	(fire ?v2)
+	(wood ?v3)
 	(not (craftgold__))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id furnace) ", " (find-text-for-id goldenore) ", " (find-text-for-id fire) ", " (find-text-for-id wood) " => " (find-text-for-id gold))
-		craftgold__
-		(create$ "(gold)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id furnace) ", " (find-text-for-id goldenore) ", " (find-text-for-id fire) ", " (find-text-for-id wood) " => " (find-text-for-id gold) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftgold__
+			(create$ (str-cat "(gold " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftgold__
+		)
+	)	
+)
 
 (defrule craft-gold___ ""
 
-	(furnace)
-	(goldenore)
-	(fire)
-	(board)
+	(furnace ?v0)
+	(goldenore ?v1)
+	(fire ?v2)
+	(board ?v3)
 	(not (craftgold___))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id furnace) ", " (find-text-for-id goldenore) ", " (find-text-for-id fire) ", " (find-text-for-id board) " => " (find-text-for-id gold))
-		craftgold___
-		(create$ "(gold)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id furnace) ", " (find-text-for-id goldenore) ", " (find-text-for-id fire) ", " (find-text-for-id board) " => " (find-text-for-id gold) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftgold___
+			(create$ (str-cat "(gold " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftgold___
+		)
+	)	
+)
 
 (defrule craft-netheritescrap ""
 
-	(furnace)
-	(ancientwreckage)
-	(fire)
-	(coal)
+	(furnace ?v0)
+	(ancientwreckage ?v1)
+	(fire ?v2)
+	(coal ?v3)
 	(not (craftnetheritescrap))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id furnace) ", " (find-text-for-id ancientwreckage) ", " (find-text-for-id fire) ", " (find-text-for-id coal) " => " (find-text-for-id netheritescrap))
-		craftnetheritescrap
-		(create$ "(netheritescrap)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id furnace) ", " (find-text-for-id ancientwreckage) ", " (find-text-for-id fire) ", " (find-text-for-id coal) " => " (find-text-for-id netheritescrap) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftnetheritescrap
+			(create$ (str-cat "(netheritescrap " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftnetheritescrap
+		)
+	)	
+)
 
 (defrule craft-netheritescrap_ ""
 
-	(furnace)
-	(ancientwreckage)
-	(fire)
-	(wood)
+	(furnace ?v0)
+	(ancientwreckage ?v1)
+	(fire ?v2)
+	(wood ?v3)
 	(not (craftnetheritescrap_))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id furnace) ", " (find-text-for-id ancientwreckage) ", " (find-text-for-id fire) ", " (find-text-for-id wood) " => " (find-text-for-id netheritescrap))
-		craftnetheritescrap_
-		(create$ "(netheritescrap)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id furnace) ", " (find-text-for-id ancientwreckage) ", " (find-text-for-id fire) ", " (find-text-for-id wood) " => " (find-text-for-id netheritescrap) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftnetheritescrap_
+			(create$ (str-cat "(netheritescrap " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftnetheritescrap_
+		)
+	)	
+)
 
 (defrule craft-netheritescrap__ ""
 
-	(furnace)
-	(ancientwreckage)
-	(fire)
-	(board)
+	(furnace ?v0)
+	(ancientwreckage ?v1)
+	(fire ?v2)
+	(board ?v3)
 	(not (craftnetheritescrap__))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id furnace) ", " (find-text-for-id ancientwreckage) ", " (find-text-for-id fire) ", " (find-text-for-id board) " => " (find-text-for-id netheritescrap))
-		craftnetheritescrap__
-		(create$ "(netheritescrap)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id furnace) ", " (find-text-for-id ancientwreckage) ", " (find-text-for-id fire) ", " (find-text-for-id board) " => " (find-text-for-id netheritescrap) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftnetheritescrap__
+			(create$ (str-cat "(netheritescrap " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftnetheritescrap__
+		)
+	)	
+)
 
 (defrule craft-bakedclay ""
 
-	(furnace)
-	(clay)
-	(fire)
-	(coal)
+	(furnace ?v0)
+	(clay ?v1)
+	(fire ?v2)
+	(coal ?v3)
 	(not (craftbakedclay))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id furnace) ", " (find-text-for-id clay) ", " (find-text-for-id fire) ", " (find-text-for-id coal) " => " (find-text-for-id bakedclay))
-		craftbakedclay
-		(create$ "(bakedclay)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id furnace) ", " (find-text-for-id clay) ", " (find-text-for-id fire) ", " (find-text-for-id coal) " => " (find-text-for-id bakedclay) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftbakedclay
+			(create$ (str-cat "(bakedclay " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftbakedclay
+		)
+	)	
+)
 
 (defrule craft-bakedclay_ ""
 
-	(furnace)
-	(clay)
-	(fire)
-	(wood)
+	(furnace ?v0)
+	(clay ?v1)
+	(fire ?v2)
+	(wood ?v3)
 	(not (craftbakedclay_))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id furnace) ", " (find-text-for-id clay) ", " (find-text-for-id fire) ", " (find-text-for-id wood) " => " (find-text-for-id bakedclay))
-		craftbakedclay_
-		(create$ "(bakedclay)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id furnace) ", " (find-text-for-id clay) ", " (find-text-for-id fire) ", " (find-text-for-id wood) " => " (find-text-for-id bakedclay) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftbakedclay_
+			(create$ (str-cat "(bakedclay " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftbakedclay_
+		)
+	)	
+)
 
 (defrule craft-bakedclay__ ""
 
-	(furnace)
-	(clay)
-	(fire)
-	(board)
+	(furnace ?v0)
+	(clay ?v1)
+	(fire ?v2)
+	(board ?v3)
 	(not (craftbakedclay__))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id furnace) ", " (find-text-for-id clay) ", " (find-text-for-id fire) ", " (find-text-for-id board) " => " (find-text-for-id bakedclay))
-		craftbakedclay__
-		(create$ "(bakedclay)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id furnace) ", " (find-text-for-id clay) ", " (find-text-for-id fire) ", " (find-text-for-id board) " => " (find-text-for-id bakedclay) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftbakedclay__
+			(create$ (str-cat "(bakedclay " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftbakedclay__
+		)
+	)	
+)
 
 (defrule craft-driedkelp ""
 
-	(furnace)
-	(laminaria)
-	(fire)
-	(coal)
+	(furnace ?v0)
+	(laminaria ?v1)
+	(fire ?v2)
+	(coal ?v3)
 	(not (craftdriedkelp))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id furnace) ", " (find-text-for-id laminaria) ", " (find-text-for-id fire) ", " (find-text-for-id coal) " => " (find-text-for-id driedkelp))
-		craftdriedkelp
-		(create$ "(driedkelp)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id furnace) ", " (find-text-for-id laminaria) ", " (find-text-for-id fire) ", " (find-text-for-id coal) " => " (find-text-for-id driedkelp) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftdriedkelp
+			(create$ (str-cat "(driedkelp " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftdriedkelp
+		)
+	)	
+)
 
 (defrule craft-driedkelp_ ""
 
-	(furnace)
-	(laminaria)
-	(fire)
-	(wood)
+	(furnace ?v0)
+	(laminaria ?v1)
+	(fire ?v2)
+	(wood ?v3)
 	(not (craftdriedkelp_))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id furnace) ", " (find-text-for-id laminaria) ", " (find-text-for-id fire) ", " (find-text-for-id wood) " => " (find-text-for-id driedkelp))
-		craftdriedkelp_
-		(create$ "(driedkelp)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id furnace) ", " (find-text-for-id laminaria) ", " (find-text-for-id fire) ", " (find-text-for-id wood) " => " (find-text-for-id driedkelp) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftdriedkelp_
+			(create$ (str-cat "(driedkelp " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftdriedkelp_
+		)
+	)	
+)
 
 (defrule craft-driedkelp__ ""
 
-	(furnace)
-	(laminaria)
-	(fire)
-	(board)
+	(furnace ?v0)
+	(laminaria ?v1)
+	(fire ?v2)
+	(board ?v3)
 	(not (craftdriedkelp__))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id furnace) ", " (find-text-for-id laminaria) ", " (find-text-for-id fire) ", " (find-text-for-id board) " => " (find-text-for-id driedkelp))
-		craftdriedkelp__
-		(create$ "(driedkelp)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ?v3 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id furnace) ", " (find-text-for-id laminaria) ", " (find-text-for-id fire) ", " (find-text-for-id board) " => " (find-text-for-id driedkelp) "  " (* 100 ?v0 ?v1 ?v2 ?v3 ) "%")
+			craftdriedkelp__
+			(create$ (str-cat "(driedkelp " (* 1 ?v0 ?v1 ?v2 ?v3 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftdriedkelp__
+		)
+	)	
+)
 
 (defrule craft-netheritepickaxe ""
 
-	(blacksmithstable)
-	(netherite)
-	(pickaxe)
+	(blacksmithstable ?v0)
+	(netherite ?v1)
+	(pickaxe ?v2)
 	(not (craftnetheritepickaxe))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id blacksmithstable) ", " (find-text-for-id netherite) ", " (find-text-for-id pickaxe) " => " (find-text-for-id netheritepickaxe))
-		craftnetheritepickaxe
-		(create$ "(netheritepickaxe)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ?v2 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id blacksmithstable) ", " (find-text-for-id netherite) ", " (find-text-for-id pickaxe) " => " (find-text-for-id netheritepickaxe) "  " (* 100 ?v0 ?v1 ?v2 ) "%")
+			craftnetheritepickaxe
+			(create$ (str-cat "(netheritepickaxe " (* 1 ?v0 ?v1 ?v2 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftnetheritepickaxe
+		)
+	)	
+)
 
 (defrule craft-fish ""
 
-	(water)
-	(fishingrod)
+	(water ?v0)
+	(fishingrod ?v1)
 	(not (craftfish))
 
 	=>
 
-		(handle-state interview
-		?*target*
-		(str-cat (find-text-for-id water) ", " (find-text-for-id fishingrod) " => " (find-text-for-id fish))
-		craftfish
-		(create$ "(fish)" )))
+	(if (< (/ (mod (random) 100) 100) (* 1 ?v0 ?v1 ))
+		then 
+		(
+			handle-state interview
+			?*target*
+			(str-cat (find-text-for-id water) ", " (find-text-for-id fishingrod) " => " (find-text-for-id fish) "  " (* 100 ?v0 ?v1 ) "%")
+			craftfish
+			(create$ (str-cat "(fish " (* 1 ?v0 ?v1 ) ")" ))
+		)
+		else
+		(
+			handle-state interview
+			?*target*
+			"Crafting failed"
+			craftfish
+		)
+	)	
+)
 
